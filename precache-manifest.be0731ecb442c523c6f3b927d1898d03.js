@@ -1,10 +1,10 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "13b469f88b2a4adb5bc75cb251d08859",
+    "revision": "9159f6cd401248a3fb6b2a99576e52c8",
     "url": "/real-speak/index.html"
   },
   {
-    "revision": "d0b14df74b75230123eb",
+    "revision": "65b513d9d5ec17d90ae0",
     "url": "/real-speak/static/css/main.d619f9c0.chunk.css"
   },
   {
@@ -16,8 +16,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/real-speak/static/js/2.ccbea44c.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "d0b14df74b75230123eb",
-    "url": "/real-speak/static/js/main.9602dc9c.chunk.js"
+    "revision": "65b513d9d5ec17d90ae0",
+    "url": "/real-speak/static/js/main.ff39798a.chunk.js"
   },
   {
     "revision": "f23be3929f1fe99d4ba4",

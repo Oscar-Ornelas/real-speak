@@ -1,14 +1,14 @@
 {
   "files": {
     "main.css": "/real-speak/static/css/main.d619f9c0.chunk.css",
-    "main.js": "/real-speak/static/js/main.9602dc9c.chunk.js",
-    "main.js.map": "/real-speak/static/js/main.9602dc9c.chunk.js.map",
+    "main.js": "/real-speak/static/js/main.ff39798a.chunk.js",
+    "main.js.map": "/real-speak/static/js/main.ff39798a.chunk.js.map",
     "runtime-main.js": "/real-speak/static/js/runtime-main.1d76ea08.js",
     "runtime-main.js.map": "/real-speak/static/js/runtime-main.1d76ea08.js.map",
     "static/js/2.ccbea44c.chunk.js": "/real-speak/static/js/2.ccbea44c.chunk.js",
     "static/js/2.ccbea44c.chunk.js.map": "/real-speak/static/js/2.ccbea44c.chunk.js.map",
     "index.html": "/real-speak/index.html",
-    "precache-manifest.c1e99d013c18fcaefccb6adf9968cfba.js": "/real-speak/precache-manifest.c1e99d013c18fcaefccb6adf9968cfba.js",
+    "precache-manifest.be0731ecb442c523c6f3b927d1898d03.js": "/real-speak/precache-manifest.be0731ecb442c523c6f3b927d1898d03.js",
     "service-worker.js": "/real-speak/service-worker.js",
     "static/css/main.d619f9c0.chunk.css.map": "/real-speak/static/css/main.d619f9c0.chunk.css.map",
     "static/js/2.ccbea44c.chunk.js.LICENSE.txt": "/real-speak/static/js/2.ccbea44c.chunk.js.LICENSE.txt"
@@ -17,6 +17,6 @@
     "static/js/runtime-main.1d76ea08.js",
     "static/js/2.ccbea44c.chunk.js",
     "static/css/main.d619f9c0.chunk.css",
-    "static/js/main.9602dc9c.chunk.js"
+    "static/js/main.ff39798a.chunk.js"
   ]
 }
