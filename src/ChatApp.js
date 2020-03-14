@@ -49,7 +49,7 @@ function ChatApp(props) {
 
   return (
     <div>
-      <h2 className="header">Hi There, Ask us anything</h2>
+      <h2 className="header">Let's Talk</h2>
       <MessageList messages={messages} />
       <Input className="input-field" onSubmit={addMessage} />
     </div>
