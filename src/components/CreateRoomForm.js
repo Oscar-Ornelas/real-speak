@@ -82,8 +82,6 @@ function CreateRoomForm(props){
               <label>Room Name
                 <input onChange={handleChange} value={roomName} required type="text" name="roomName"/>
               </label>
-
-
               <button onClick={handleSubmit} >Create Room</button>
             </form>
           </div>

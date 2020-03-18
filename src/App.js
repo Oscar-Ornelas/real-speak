@@ -5,7 +5,8 @@ import NavBar from './components/NavBar';
 import Home from './components/Home';
 import ExternalApi from './views/ExternalApi';
 import ChatApp from './components/ChatApp';
-import Profile from "./components/Profile";
+import Profile from './components/Profile';
+import SideBar from './components/SideBar';
 import browserHistory from "./utils/history";
 
 import { default as Chatkit } from '@pusher/chatkit-server';
@@ -15,10 +16,11 @@ function App() {
   const { loading, user } = useAuth0();
 
   return (
-    <div className="App">
+    <div className="app">
       <Router history={browserHistory}>
         <header>
           <NavBar/>
+          <SideBar/>
         </header>
         <Switch>
           <Route path="/" exact>
