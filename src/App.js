@@ -1,56 +1,40 @@
 import React, {useState} from 'react';
-import ChatMessage from './ChatMessage';
-import SignUp from './SignUp';
-import ChatApp from './ChatApp';
+import {Switch, Route, Router, useHistory} from 'react-router-dom';
+import './App.css';
+import ChatMessage from './components/ChatMessage';
+import Home from './components/Home';
+import ExternalApi from './views/ExternalApi';
+import ChatApp from './components/ChatApp';
+import Profile from "./components/Profile";
+import browserHistory from "./utils/history";
 
 import { default as Chatkit } from '@pusher/chatkit-server';
-
-const chatkit = new Chatkit({
-  instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR_KEY,
-  key: process.env.REACT_APP_CHATKIT_SECRET_KEY
-})
+import { useAuth0 } from "./react-auth0-spa";
 
 function App() {
-  const [currentView, setCurrentView] = useState('signup');
-  const [currentId, setCurrentId] = useState('');
-  const [currentUsername, setCurrentUsername] = useState('');
-
-  function createUser(username) {
-      chatkit.createUser({
-          id: username,
-          name: username,
-      })
-      .then((currentUser) => {
-          setCurrentUsername(username);
-          setCurrentId(username);
-          setCurrentView('chatApp');
-      }).catch((err) => {
-          if(err.status === 400) {
-            setCurrentUsername(username);
-            setCurrentId(username);
-            setCurrentView('chatApp');
-          } else {
-            console.log(err.status);
-          }
-      });
-  }
-
-
-  let view = '';
-  if (currentView === "ChatMessage") {
-      view = <ChatMessage  setCurrentView={setCurrentView}/>
-  } else if (currentView === "signup") {
-      view = <SignUp onSubmit={createUser}/>
-  } else if (currentView === "chatApp") {
-      view = <ChatApp currentId={currentId}/>
-  }
+  const { loading, user } = useAuth0();
 
   return (
-      <div className="App">
-          {view}
-      </div>
+    <div className="App">
+      <Router history={browserHistory}>
+        <header>
+          <ChatMessage/>
+        </header>
+        <Switch>
+          <Route path="/" exact>
+            <Home/>
+          </Route>
+          <Route path="/profile" component={Profile} />
+          <Route path="/chatapp">
+            <ChatApp currentId={user ? user.name : ""}/>
+          </Route>
+          <Route path="/external-api">
+            <ExternalApi/>
+          </Route>
+        </Switch>
+      </Router>
+    </div>
   );
-
 }
 
 export default App;
