@@ -1,21 +1,19 @@
 import React, {useState, useEffect} from 'react';
-import {useHistory} from 'react-router-dom';
-
 import { default as Chatkit } from '@pusher/chatkit-server';
 import { useAuth0 } from "../react-auth0-spa";
+import CreateRoomForm from './CreateRoomForm';
 
 const chatkit = new Chatkit({
   instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR_KEY,
   key: process.env.REACT_APP_CHATKIT_SECRET_KEY
 })
 
-function Home() {
+function Home(props) {
   const token = process.env.REACT_APP_MGMT_API_ACCESS_TOKEN;
   const INSTANCE_ID = process.env.REACT_APP_CHATKIT_INSTANCE_ID;
-  const history = useHistory();
   const [isChatkitUser, setIsChatkitUser] = useState(false);
   const [chatkitUser, setChatkitUser] = useState({});
-  const { loading, user } = useAuth0();
+  const {user} = useAuth0();
   const [fullUser, setFullUser] = useState({});
 
   useEffect(() => {
@@ -50,9 +48,11 @@ function Home() {
     }
   }, [fullUser])
 
-  console.log(fullUser);
-
-  return null;
+  return (
+    <div>
+      {user && <CreateRoomForm currentId={user.name}/>}
+    </div>
+  );
 
 }
 

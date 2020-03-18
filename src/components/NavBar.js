@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import ChatApp from './ChatApp';
 import { useAuth0 } from "../react-auth0-spa";
 
-function ChatMessage() {
+function NavBar() {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (
@@ -26,4 +26,4 @@ function ChatMessage() {
 
 }
 
-export default ChatMessage;
+export default NavBar;

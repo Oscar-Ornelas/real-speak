@@ -17,6 +17,11 @@ body {
   padding: 0 1em;
 }
 
+/*Create Room Form */
+.room-form-header {
+  color: black;
+}
+
 /*Chat Box*/
 .room-header {
   padding: 1em 0 1.25em 1.5rem;

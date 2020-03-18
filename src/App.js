@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import {Switch, Route, Router, useHistory} from 'react-router-dom';
 import './App.css';
-import ChatMessage from './components/ChatMessage';
+import NavBar from './components/NavBar';
 import Home from './components/Home';
 import ExternalApi from './views/ExternalApi';
 import ChatApp from './components/ChatApp';
@@ -18,7 +18,7 @@ function App() {
     <div className="App">
       <Router history={browserHistory}>
         <header>
-          <ChatMessage/>
+          <NavBar/>
         </header>
         <Switch>
           <Route path="/" exact>
