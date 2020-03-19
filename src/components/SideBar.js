@@ -37,7 +37,7 @@ function SideBar(props) {
           setRooms(currentUser.rooms);
       })
       .catch(error => console.log(error))
-  }, [])
+  }, [rooms])
 
   function toggleSlide() {
     setNavSlide(prevNavSlide => !prevNavSlide);

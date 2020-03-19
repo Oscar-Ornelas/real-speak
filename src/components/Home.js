@@ -1,4 +1,6 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory, Redirect} from 'react-router-dom';
+import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import { default as Chatkit } from '@pusher/chatkit-server';
 import { useAuth0 } from "../react-auth0-spa";
 
@@ -13,8 +15,8 @@ function Home(props) {
   const [isChatkitUser, setIsChatkitUser] = useState(false);
   const [chatkitUser, setChatkitUser] = useState({});
   const [fullUser, setFullUser] = useState({});
+  const history = useHistory();
   const {user} = useAuth0();
-
 
   useEffect(() => {
     if(user) {
@@ -44,11 +46,36 @@ function Home(props) {
           name: fullUser.username
         })
       }
-
     }
   }, [fullUser])
 
-  return null;
+  useEffect(() => {
+    if(user) {
+      const chatManager = new ChatManager({
+          instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR_KEY,
+          userId: user.email,
+          tokenProvider: new TokenProvider({
+              url: process.env.REACT_APP_TEST_TOKEN
+          })
+      })
+
+      chatManager
+      .connect()
+      .then(currentUser => {
+        if(currentUser.rooms.length < 1) {
+          currentUser.createRoom({
+            name: 'General',
+            private: false
+          })
+          .then(room => history.push(`/chatapp/${room.id}`))
+        }
+      })
+    }
+  }, [fullUser]);
+
+  return (
+    <Redirect to="/chatapp/"/>
+  )
 
 }
 
