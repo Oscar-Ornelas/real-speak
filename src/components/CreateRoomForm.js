@@ -1,18 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import Modal from 'react-modal';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
 Modal.setAppElement('#root')
 
 function CreateRoomForm(props){
@@ -37,7 +25,6 @@ function CreateRoomForm(props){
       })
       .catch(error => console.log(error))
   }, [])
-
 
   function openModal() {
     setIsOpen(true);
@@ -67,23 +54,28 @@ function CreateRoomForm(props){
     <div>
     {!(currentUser === null)  && (
       <>
-      <button onClick={openModal}>Create Room</button>
+      <p onClick={openModal} className="sidebar-modal-header">+ Add a room</p>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
         contentLabel="Create Room Form"
+        className="modal"
+        overlayClassName="overlay"
       >
         <div className="room-form-modal">
-          <h2 className="room-form-header">Create Room</h2>
-          <button className="close-room-form" onClick={closeModal}>close</button>
+          <div className="room-form-modal-header">
+            <h2 className="room-form-header">Create Room</h2>
+            <button className="close-room-form" onClick={closeModal}>X</button>
+          </div>
+
 
           <div className="room-form-container">
             <form className="room-form">
-              <label>Room Name
-                <input onChange={handleChange} value={roomName} required type="text" name="roomName"/>
-              </label>
-              <button onClick={handleSubmit} >Create Room</button>
+              <div className="room-form-inputs">
+                <label className="room-form-label" for="roomName">Room Name</label>
+                <input id="roomName" onChange={handleChange} value={roomName} required type="text" name="roomName"/>
+              </div>
+              <button className="room-form-submit" onClick={handleSubmit} >Create Room</button>
             </form>
           </div>
         </div>

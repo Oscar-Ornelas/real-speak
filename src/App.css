@@ -16,13 +16,17 @@ body {
   height: 100%;
 }
 
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
 .link {
   color: inherit;
   text-decoration: none;
-  padding: 0 1em;
 }
 
-/*SideBar*/
+/* SideBar */
 .nav {
   position: fixed;
   transform: translateX(-100%);
@@ -38,9 +42,104 @@ body {
   transform: translateX(0);
 }
 
-/*Create Room Form */
+.nav-content {
+  margin: 0 0 0 1em;
+}
+
+.nav-list-header {
+  margin: 1em 0 0.5em;
+}
+
+.nav-list {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 0 0.5em;
+}
+
+.nav-item {
+  margin: 0.3em 0;
+}
+
+.logout-btn {
+  margin: 62vh 0 0 0;
+}
+
+/* Modals */
+.modal {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  right: auto;
+  bottom: auto;
+  margin-right: -50%;
+  transform: translate(-50%, -50%);
+  border-radius: 10px;
+  background: white;
+  color: black;
+}
+
+.overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(0, 0, 0, 0.5);
+}
+
+.sidebar-modal-header {
+  cursor: pointer;
+  margin: 0.25em 0;
+}
+
+.room-form-modal {
+  margin: 0;
+  padding: 1em;
+  display: flex;
+  flex-direction: column;
+  width: 300px;
+}
+
+.room-form-modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
 .room-form-header {
   color: black;
+  margin: 0;
+}
+
+.close-room-form {
+  background: none;
+  border: none;
+  margin: 0;
+  padding: 0;
+}
+
+.room-form-container {
+  margin: 1em 0 0 0;
+}
+
+.room-form {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+}
+
+.room-form-inputs {
+  display: flex;
+  flex-direction: column;
+  margin: 0 0 1em 0;
+}
+
+.room-form-label {
+  margin: 0 0 0.5em 0;
+}
+
+.room-form-submit {
+  margin: 0 0 0 auto;
 }
 
 /*Chat Box*/
@@ -51,7 +150,6 @@ body {
 /*Message List*/
 .message-list {
   width: 100%;
-  list-style-type: none;
   padding: 0 0 0 1.5rem;
   margin: 0 0 4em 0;
 }
