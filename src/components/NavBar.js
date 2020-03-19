@@ -3,7 +3,7 @@ import {Link} from 'react-router-dom';
 import ChatApp from './ChatApp';
 import { useAuth0 } from "../react-auth0-spa";
 
-function NavBar() {
+function NavBar(props) {
   const { isAuthenticated, loginWithRedirect, logout } = useAuth0();
 
   return (

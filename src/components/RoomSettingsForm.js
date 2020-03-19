@@ -1,17 +1,5 @@
 import React, {useState, useEffect} from 'react';
 import Modal from 'react-modal';
-
-const customStyles = {
-  content : {
-    top                   : '50%',
-    left                  : '50%',
-    right                 : 'auto',
-    bottom                : 'auto',
-    marginRight           : '-50%',
-    transform             : 'translate(-50%, -50%)'
-  }
-};
-
 Modal.setAppElement('#root')
 
 function RoomSettingsForm(props) {
@@ -48,19 +36,24 @@ function RoomSettingsForm(props) {
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}
-        style={customStyles}
         contentLabel="Room Settings"
+        className="modal"
+        overlayClassName="overlay"
       >
         <div className="room-form-modal">
-          <h2 className="room-form-header">Settings</h2>
-          <button className="close-room-form" onClick={closeModal}>close</button>
-
+          <div className="room-form-modal-header">
+            <h2 className="room-form-header">Settings</h2>
+            <button className="close-room-form" onClick={closeModal}>X</button>
+          </div>
           <div className="room-form-container">
             <form className="room-form">
-              <label>User Id
-                <input onChange={handleChange} value={newUserId} required type="text" name="newUserId"/>
-              </label>
-              <button onClick={handleSubmit}>Add User</button>
+              <div className="room-form-inputs">
+                <div className="input-item">
+                  <label className="room-form-label" for="newUserId">User Id</label>
+                  <input id="newUserId" onChange={handleChange} value={newUserId} required type="text" name="newUserId"/>
+                </div>
+              </div>
+              <button className="room-form-submit" onClick={handleSubmit}>Add User</button>
             </form>
           </div>
         </div>

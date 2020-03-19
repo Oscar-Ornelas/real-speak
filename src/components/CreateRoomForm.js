@@ -68,7 +68,6 @@ function CreateRoomForm(props){
             <button className="close-room-form" onClick={closeModal}>X</button>
           </div>
 
-
           <div className="room-form-container">
             <form className="room-form">
               <div className="room-form-inputs">

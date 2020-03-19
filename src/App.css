@@ -134,6 +134,11 @@ ul {
   margin: 0 0 1em 0;
 }
 
+.input-item {
+  display: flex;
+  flex-direction: column;
+}
+
 .room-form-label {
   margin: 0 0 0.5em 0;
 }

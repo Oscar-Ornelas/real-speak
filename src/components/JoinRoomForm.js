@@ -59,15 +59,18 @@ function JoinRoomForm(props) {
             overlayClassName="overlay"
           >
             <div className="room-form-modal">
-              <h2 className="room-form-header">Join Room</h2>
-              <button className="close-room-form" onClick={closeModal}>close</button>
+              <div className="room-form-modal-header">
+                <h2 className="room-form-header">Join Room</h2>
+                <button className="close-room-form" onClick={closeModal}>X</button>
+              </div>
 
               <div className="room-form-container">
                 <form className="room-form">
-                  <label>Room Id
-                    <input onChange={handleChange} value={roomId} required type="text" name="roomId"/>
-                  </label>
-                  <button onClick={handleSubmit}>Join Room</button>
+                  <div className="room-form-inputs">
+                    <label className="room-form-label" for="roomId">Room Id</label>
+                    <input id="roomId" onChange={handleChange} value={roomId} required type="text" name="roomId"/>
+                  </div>
+                  <button className="room-form-submit" onClick={handleSubmit}>Join Room</button>
                 </form>
               </div>
             </div>
