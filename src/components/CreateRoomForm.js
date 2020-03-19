@@ -60,13 +60,14 @@ function CreateRoomForm(props){
     })
     .catch(err => console.log(err))
     setIsOpen(false);
+    window.location.reload();
   }
 
   return (
     <div>
     {!(currentUser === null)  && (
       <>
-      <button onClick={openModal}>Open Modal</button>
+      <button onClick={openModal}>Create Room</button>
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

@@ -20,15 +20,15 @@ function App() {
       <Router history={browserHistory}>
         <header>
           <NavBar/>
-          <SideBar/>
+          {user && <SideBar currentId={user.name}/>}
         </header>
         <Switch>
           <Route path="/" exact>
             <Home/>
           </Route>
           <Route path="/profile" component={Profile} />
-          <Route path="/chatapp">
-            <ChatApp currentId={user ? user.name : ""}/>
+          <Route path="/chatapp/:roomId">
+            {user && <ChatApp currentId={user.name}/>}
           </Route>
           <Route path="/external-api">
             <ExternalApi/>

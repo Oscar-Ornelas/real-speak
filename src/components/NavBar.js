@@ -16,11 +16,9 @@ function NavBar() {
 
       {isAuthenticated && (
         <span>
-          <Link className="link" to="/">Home</Link>&nbsp;
-          <Link className="link" to="/chatapp">Chat App</Link>
+          <Link className="link" to="/">Home</Link>
         </span>
       )}
-
     </div>
   )
 
