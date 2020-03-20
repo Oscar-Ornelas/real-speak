@@ -14,7 +14,8 @@ function Home(props) {
   const INSTANCE_ID = process.env.REACT_APP_CHATKIT_INSTANCE_ID;
   const [isChatkitUser, setIsChatkitUser] = useState(false);
   const [chatkitUser, setChatkitUser] = useState({});
-  const [fullUser, setFullUser] = useState({});
+  const [fullUserInfo, setFullUserInfo] = useState({});
+  const [currentRoomId, setCurrentRoomId] = useState('');
   const history = useHistory();
   const {user} = useAuth0();
 
@@ -26,7 +27,7 @@ function Home(props) {
         }
       })
       .then(response => response.json())
-      .then(data => setFullUser(data))
+      .then(data => setFullUserInfo(data))
     }
   }, [user])
 
@@ -36,18 +37,18 @@ function Home(props) {
       .then(response => response.json())
       .then(data => {
         setChatkitUser(data);
-        setIsChatkitUser(chatkitUser.custom_data.email === user.email);
+        setIsChatkitUser(chatkitUser.custom_data.email === user.email)
       })
       .catch(err => setIsChatkitUser(false))
 
       if(!isChatkitUser) {
         chatkit.createUser({
           id: user.email,
-          name: fullUser.username
+          name: fullUserInfo.username
         })
       }
     }
-  }, [fullUser])
+  }, [fullUserInfo])
 
   useEffect(() => {
     if(user) {
@@ -69,12 +70,16 @@ function Home(props) {
           })
           .then(room => history.push(`/chatapp/${room.id}`))
         }
+        setCurrentRoomId(currentUser.rooms[0].id);
       })
     }
-  }, [fullUser]);
+  }, [fullUserInfo]);
 
   return (
-    <Redirect to="/chatapp/"/>
+    <div>
+      {currentRoomId !== '' && <Redirect to={`/chatapp/${currentRoomId}`}/>}
+    </div>
+
   )
 
 }
