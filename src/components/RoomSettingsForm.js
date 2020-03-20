@@ -1,7 +1,8 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Modal from 'react-modal';
-Modal.setAppElement('#root')
+import DeleteRoomForm from './DeleteRoomForm';
+Modal.setAppElement('#root');
 
 function RoomSettingsForm(props) {
   const [formData, setFormData] = useState({newUserID: "", userId: "", newRoomName: ""});
@@ -138,8 +139,7 @@ function RoomSettingsForm(props) {
                 </div>
                 <button className="room-form-submit" onClick={changeRoomName}>Change Name</button>
 
-                <button className="room-form-submit room-form-delete" onClick={deleteRoom}>Delete Room</button>
-
+                <DeleteRoomForm deleteRoom={deleteRoom}/>
               </div>
             </form>
           </div>
