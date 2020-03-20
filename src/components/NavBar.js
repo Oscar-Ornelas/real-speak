@@ -6,7 +6,7 @@ function NavBar(props) {
     <header className="header">
       <div className="nav-container">
         <div className="nav-adjacent">
-          <button onClick={props.toggleSlide} className="open-side-nav"><i className="fas fa-bars"></i></button>
+          <button onClick={props.toggleSlide} className="open-room-side-nav"><i className="fas fa-bars"></i></button>
           <h2 className="room-header"># {props.roomName}</h2>
         </div>
         <nav className="nav">

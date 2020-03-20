@@ -5,7 +5,7 @@ import { useAuth0 } from "../react-auth0-spa";
 import CreateRoomForm from './CreateRoomForm';
 import JoinRoomForm from './JoinRoomForm';
 
-function SideBar(props) {
+function RoomSideBar(props) {
   const [currentUser, setCurrentUser] = useState(null);
   const [rooms, setRooms] = useState([]);
   const { isAuthenticated, loginWithRedirect, logout, user} = useAuth0();
@@ -45,14 +45,14 @@ function SideBar(props) {
   }
 
   return (
-    <div className="side-bar">
-      <div className="side-bar-content">
-        <nav className={`side-nav ${props.navSlide ? "side-nav-open" : ""}`}>
-          <div className="side-nav-content">
-            <h3 className="side-nav-list-header">Rooms</h3>
-            <ul className="side-nav-list">
+    <div className="room-side-bar">
+      <div className="room-side-bar-content">
+        <nav className={`room-side-nav ${props.navSlide ? "room-side-nav-open" : ""}`}>
+          <div className="room-side-nav-content">
+            <h3 className="room-side-nav-list-header">Rooms</h3>
+            <ul className="room-side-nav-list">
               {rooms.map(room => (
-                <li key={room.id} onClick={reloadPage} className="side-nav-item"><Link className="link" to={`/chatapp/${room.id}`}># {room.name}</Link></li>
+                <li key={room.id} onClick={reloadPage} className="room-side-nav-item"><Link className="link" to={`/chatapp/${room.id}`}># {room.name}</Link></li>
               ))}
               {user && <CreateRoomForm currentId={user.name}/>}
               {user && <JoinRoomForm currentId={user.name}/>}
@@ -71,4 +71,4 @@ function SideBar(props) {
   )
 }
 
-export default SideBar;
+export default RoomSideBar;

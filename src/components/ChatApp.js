@@ -4,6 +4,7 @@ import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import useApiCall from '../views/useApiCall';
 import {useAuth0} from "../react-auth0-spa";
 import NavBar from './NavBar';
+import RoomSideBar from './RoomSideBar';
 import MessageList from './MessageList';
 import Input from './Input';
 
@@ -61,15 +62,18 @@ function ChatApp(props) {
 
   return (
     <div>
-      <NavBar currentRoomId={currentRoom.id} currentUser={currentUser} toggleSlide={props.toggleSlide} roomName={currentRoom.name}/>
-      <div className="chat-box">
+      <header>
+        <NavBar currentRoomId={currentRoom.id} currentUser={currentUser} toggleSlide={props.toggleSlide} roomName={currentRoom.name}/>
+        <RoomSideBar setNavSlide={props.setNavSlide} navSlide={props.navSlide} currentId={props.currentId}/>
+      </header>
+      <main className="chat-box">
       {!(currentRoom.name === undefined) && (
         <>
           <MessageList messages={messages} roomName={currentRoom.name}/>
           <Input roomName={currentRoom.name} className="input-field" onSubmit={addMessage} />
         </>
       )}
-      </div>
+      </main>
     </div>
   )
 }
