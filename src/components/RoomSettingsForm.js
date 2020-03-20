@@ -139,7 +139,7 @@ function RoomSettingsForm(props) {
                 </div>
                 <button className="room-form-submit" onClick={changeRoomName}>Change Name</button>
 
-                <DeleteRoomForm deleteRoom={deleteRoom}/>
+                <DeleteRoomForm roomName={props.roomName} deleteRoom={deleteRoom}/>
               </div>
             </form>
           </div>

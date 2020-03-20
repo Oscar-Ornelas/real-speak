@@ -67,8 +67,10 @@ function JoinRoomForm(props) {
               <div className="room-form-container">
                 <form className="room-form">
                   <div className="room-form-inputs">
-                    <label className="room-form-label" for="roomId">Room Id</label>
-                    <input className="input" id="roomId" onChange={handleChange} value={roomId} required type="text" name="roomId"/>
+                    <div className="input-item">
+                      <label className="room-form-label" for="roomId">Room Id</label>
+                      <input className="input" id="roomId" onChange={handleChange} value={roomId} required type="text" name="roomId"/>
+                    </div>
                   </div>
                   <button className="room-form-submit" onClick={handleSubmit}>Join Room</button>
                 </form>

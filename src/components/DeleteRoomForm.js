@@ -15,7 +15,7 @@ function DeleteRoomForm(props) {
   }
 
   return (
-    <div>
+    <div className="delete-room-modal">
       <button className="room-form-submit room-form-delete" onClick={openModal}>Delete Room</button>
       <Modal
         isOpen={modalIsOpen}
@@ -30,10 +30,9 @@ function DeleteRoomForm(props) {
             <button className="close-room-form" onClick={closeModal}>X</button>
           </div>
 
-          <div className="room-form-container">
-            <form className="room-form">
-              <button className="room-form-submit" onClick={props.deleteRoom}>Delete Room</button>
-            </form>
+          <div className="room-form-container delete-form-container">
+            <p className="delete-disclaimer">Are you sure you want to delete <strong>#{props.roomName}</strong>?</p>
+            <button className="room-form-submit room-form-delete" onClick={props.deleteRoom}>Delete Room</button>
           </div>
         </div>
       </Modal>
