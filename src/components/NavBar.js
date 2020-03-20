@@ -11,6 +11,7 @@ function NavBar(props) {
         </div>
         <nav className="nav">
           <ul className="nav-list">
+            <li className="nav-item"><i className="fas fa-user-friends"></i></li>
             <RoomSettingsForm currentRoomId={props.currentRoomId} currentUser={props.currentUser}/>
           </ul>
         </nav>

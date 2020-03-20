@@ -51,7 +51,7 @@ function RoomSettingsForm(props) {
               <div className="room-form-inputs">
                 <div className="input-item">
                   <label className="room-form-label" for="newUserId">User Id</label>
-                  <input id="newUserId" onChange={handleChange} value={newUserId} required type="text" name="newUserId"/>
+                  <input className="input" id="newUserId" onChange={handleChange} value={newUserId} required type="text" name="newUserId"/>
                 </div>
               </div>
               <button className="room-form-submit" onClick={handleSubmit}>Add User</button>

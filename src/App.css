@@ -10,10 +10,15 @@ html {
 body {
   margin: 0;
   padding: 0;
-  font-family: sans-serif;
+  font-family: 'Roboto', sans-serif;
   background: #37474f;
   color: #fff;
   height: 100%;
+}
+
+input,
+button {
+  font-family: 'Roboto', sans-serif;
 }
 
 strong {
@@ -61,6 +66,16 @@ ul {
 
 .room-header {
   padding: 0 0 0 1em;
+}
+
+.nav-list {
+  display: flex;
+}
+
+.nav-item {
+  font-size: 1.2rem;
+  padding: 0 1.25em;
+  cursor: pointer;
 }
 
 .navbar-modal-btn {
@@ -124,6 +139,7 @@ ul {
   border-radius: 10px;
   background: #fff;
   color: #000;
+  outline: none;
 }
 
 .overlay {
@@ -163,7 +179,14 @@ ul {
   background: none;
   border: none;
   margin: 0;
-  padding: 0;
+  padding: 5px;
+  font-size: 1.2rem;
+  cursor: pointer;
+}
+
+.close-room-form:hover,
+.close-room-form:focus {
+  background: rgba(0, 0, 0, 0.2);
 }
 
 .room-form-container {
@@ -179,7 +202,7 @@ ul {
 .room-form-inputs {
   display: flex;
   flex-direction: column;
-  margin: 0 0 1em 0;
+  margin: 0 0 1.5em 0;
 }
 
 .input-item {
@@ -191,8 +214,29 @@ ul {
   margin: 0 0 0.5em 0;
 }
 
+.input {
+  padding: 10px;
+  border-radius: 6px;
+  border: 1px solid #000;
+  transform: scale(1);
+  transition: transform 250ms;
+}
+
+.input:focus {
+  outline: none;
+  transform: scale(1.01);
+  border: 1px solid #A5CBE2;
+  box-shadow: 0px 0px 5px rgba(160, 202, 226, 1);
+}
+
 .room-form-submit {
   margin: 0 0 0 auto;
+  padding: 8px 6px;
+  border-radius: 4px;
+  border: 0.5px solid #000;
+  background: #f5f5f5;
+  font-weight: 700;
+  cursor: pointer;
 }
 
 /*Message List*/
