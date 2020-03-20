@@ -4,14 +4,14 @@
 }
 
 html {
-  height: 100%;
+  min-height: 100vh;
 }
 
 body {
   margin: 0;
   padding: 0;
   font-family: sans-serif;
-  background: #263238;
+  background: #37474f;
   color: #fff;
   height: 100%;
 }
@@ -26,37 +26,73 @@ ul {
   text-decoration: none;
 }
 
+/*NavBar*/
+.header {
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+}
+
+.nav-container,
+.nav-adjacent {
+  display: flex;
+  align-items: center;
+}
+
+.nav-container {
+  justify-content: space-between;
+  padding: 0 1em;
+  background: #263238;
+}
+
+.open-side-nav {
+  background: none;
+  color: #fff;
+  border: none;
+  font-size: 1.5rem;
+}
+
+.room-header {
+  padding: 0 0 0 1em;
+}
+
+.fa-ellipsis-v {
+  font-size: 1.25rem;
+}
+
 /* SideBar */
-.nav {
+.side-nav {
   position: fixed;
   transform: translateX(-100%);
   transition: 250ms transform;
   z-index: 101;
-  background: #607d8b;
+  background: #455a64;
   min-height: 100vh;
   width: 250px;
   top: 0;
 }
 
-.nav-open {
+.side-nav-open {
   transform: translateX(0);
 }
 
-.nav-content {
+.side-nav-content {
   margin: 0 0 0 1em;
 }
 
-.nav-list-header {
+.side-nav-list-header {
   margin: 1em 0 0.5em;
 }
 
-.nav-list {
+.side-nav-list {
   display: flex;
   flex-direction: column;
   margin: 0 0 0 0.5em;
 }
 
-.nav-item {
+.side-nav-item {
   margin: 0.3em 0;
 }
 
@@ -74,8 +110,8 @@ ul {
   margin-right: -50%;
   transform: translate(-50%, -50%);
   border-radius: 10px;
-  background: white;
-  color: black;
+  background: #fff;
+  color: #000;
 }
 
 .overlay {
@@ -147,16 +183,10 @@ ul {
   margin: 0 0 0 auto;
 }
 
-/*Chat Box*/
-.room-header {
-  padding: 1em 0 1.25em 1.5rem;
-}
-
 /*Message List*/
 .message-list {
   width: 100%;
-  padding: 0 0 0 1.5rem;
-  margin: 0 0 4em 0;
+  padding: 4em 0 4.25em 1.5rem;
 }
 
 .message-sender {
@@ -169,6 +199,16 @@ ul {
   margin: 0;
 }
 
+.message-welcome {
+  position: absolute;
+  bottom: 10%;
+}
+
+.message-welcome .room-header {
+  padding: 0;
+  margin: 0 0 0.25em 0;
+}
+
 /*Input*/
 .form-container {
   position: fixed;
@@ -177,7 +217,7 @@ ul {
   top: 100%;
   transform: translateY(-100%);
   border-top: 0.5px solid black;
-  padding: 0.25em 0 0 0;
+  padding: 0.45em 0 0 0;
   background: #263238;
 }
 

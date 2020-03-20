@@ -7,13 +7,12 @@ import JoinRoomForm from './JoinRoomForm';
 
 function SideBar(props) {
   const [currentUser, setCurrentUser] = useState(null);
-  const [navSlide, setNavSlide] = useState(false);
   const [rooms, setRooms] = useState([]);
   const { isAuthenticated, loginWithRedirect, logout, user} = useAuth0();
 
   useEffect(() => {
     function removeNavSlide() {
-      setNavSlide(false)
+      props.setNavSlide(false)
     }
 
     document.body.addEventListener("click", removeNavSlide);
@@ -39,10 +38,6 @@ function SideBar(props) {
       .catch(error => console.log(error))
   }, [rooms])
 
-  function toggleSlide() {
-    setNavSlide(prevNavSlide => !prevNavSlide);
-  }
-
   function reloadPage() {
     setTimeout(() => {
       window.location.reload();
@@ -52,13 +47,12 @@ function SideBar(props) {
   return (
     <div className="side-bar">
       <div className="side-bar-content">
-        <button onClick={toggleSlide} className="open-nav">&#9776;</button>
-        <nav className={`nav ${navSlide ? "nav-open" : ""}`}>
-          <div className="nav-content">
-            <h3 className="nav-list-header">Rooms</h3>
-            <ul className="nav-list">
+        <nav className={`side-nav ${props.navSlide ? "side-nav-open" : ""}`}>
+          <div className="side-nav-content">
+            <h3 className="side-nav-list-header">Rooms</h3>
+            <ul className="side-nav-list">
               {rooms.map(room => (
-                <li key={room.id} onClick={reloadPage} className="nav-item"><Link className="link" to={`/chatapp/${room.id}`}># {room.name}</Link></li>
+                <li key={room.id} onClick={reloadPage} className="side-nav-item"><Link className="link" to={`/chatapp/${room.id}`}># {room.name}</Link></li>
               ))}
               {user && <CreateRoomForm currentId={user.name}/>}
               {user && <JoinRoomForm currentId={user.name}/>}
