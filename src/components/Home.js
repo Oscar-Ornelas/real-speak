@@ -66,7 +66,7 @@ function Home(props) {
         if(currentUser.rooms.length < 1) {
           currentUser.createRoom({
             name: 'General',
-            private: false
+            private: true
           })
           .then(room => history.push(`/chatapp/${room.id}`))
         }

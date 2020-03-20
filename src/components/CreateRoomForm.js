@@ -43,7 +43,7 @@ function CreateRoomForm(props){
     e.preventDefault();
     currentUser.createRoom({
       name: roomName,
-      private: false,
+      private: true,
     })
     .catch(err => console.log(err))
     setIsOpen(false);
