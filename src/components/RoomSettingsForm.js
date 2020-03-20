@@ -1,10 +1,12 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 function RoomSettingsForm(props) {
-  const [newUserId, setNewUserId] = useState("");
+  const [formData, setFormData] = useState({newUserID: "", userId: "", newRoomName: ""});
   const [modalIsOpen,setIsOpen] = useState(false);
+  const history = useHistory();
 
   function openModal() {
     setIsOpen(true);
@@ -15,19 +17,63 @@ function RoomSettingsForm(props) {
   }
 
   function handleChange(e) {
-    const {value} = e.target;
-    setNewUserId(value);
+    const {value, name} = e.target;
+    setFormData(prevFormData => ({...prevFormData, [name]: value}));
   }
 
-  function handleSubmit(e) {
+  function addUser(e) {
     e.preventDefault();
     props.currentUser.addUserToRoom({
-      userId: newUserId,
+      userId: formData.newUserId,
       roomId: props.currentRoomId
     })
     .catch(err => console.log(err))
     setIsOpen(false);
-    setNewUserId("");
+    setFormData(prevFormData => ({...prevFormData, newUserId: ""}));
+  }
+
+  function removeUser(e) {
+    e.preventDefault();
+    props.currentUser.removeUserFromRoom({
+      userId: formData.userId,
+      roomId: props.currentRoomId
+    })
+    .catch(err => console.log(err))
+    setIsOpen(false);
+    setFormData(prevFormData => ({...prevFormData, userId: ""}));
+  }
+
+  function changeRoomName(e) {
+    e.preventDefault();
+    if(formData.newRoomName.length > 0) {
+      props.currentUser.updateRoom({
+        roomId: props.currentRoomId,
+        name: formData.newRoomName
+      })
+      .catch(err => console.log(err))
+      setIsOpen(false);
+      setFormData(prevFormData => ({...prevFormData, newRoomName: ""}));
+      setTimeout(() => {
+        window.location.reload();
+      }, 100);
+    }
+  }
+
+  function deleteRoom(e) {
+    e.preventDefault();
+    setIsOpen(false);
+    let newRoomId = "";
+    props.currentUser.deleteRoom({roomId: props.currentRoomId})
+    .then(() => {
+      props.currentUser.rooms.forEach(room => {
+        if(room.id !== props.currentRoomId) {
+          newRoomId = room.id;
+          console.log(newRoomId);
+        }
+      })
+      newRoomId === "" ? history.push("/") : history.push(`/chatapp/${newRoomId}`);
+      window.location.reload();
+    })
   }
 
   return (
@@ -49,12 +95,52 @@ function RoomSettingsForm(props) {
           <div className="room-form-container">
             <form className="room-form">
               <div className="room-form-inputs">
+
                 <div className="input-item">
-                  <label className="room-form-label" for="newUserId">User Id</label>
-                  <input className="input" id="newUserId" onChange={handleChange} value={newUserId} required type="text" name="newUserId"/>
+                  <label className="room-form-label" for="newUserId">Add user</label>
+                  <input
+                    placeholder="User Id (Email)"
+                    className="input"
+                    id="newUserId"
+                    onChange={handleChange}
+                    value={formData.newUserId}
+                    type="text"
+                    name="newUserId"
+                  />
                 </div>
+                <button className="room-form-submit" onClick={addUser}>Add User</button>
+
+                <div className="input-item">
+                  <label className="room-form-label" for="userId">Remove user</label>
+                  <input
+                    placeholder="User Id (Email)"
+                    className="input"
+                    id="userId"
+                    onChange={handleChange}
+                    value={formData.userId}
+                    type="text"
+                    name="userId"
+                  />
+                </div>
+                <button className="room-form-submit" onClick={removeUser}>Remove User</button>
+
+                <div className="input-item">
+                  <label className="room-form-label" for="newRoomName">Change room name</label>
+                  <input
+                    placeholder="e.g. plan-event"
+                    className="input"
+                    id="newRoomName"
+                    onChange={handleChange}
+                    value={formData.newRoomName}
+                    type="text"
+                    name="newRoomName"
+                  />
+                </div>
+                <button className="room-form-submit" onClick={changeRoomName}>Change Name</button>
+
+                <button className="room-form-submit room-form-delete" onClick={deleteRoom}>Delete Room</button>
+
               </div>
-              <button className="room-form-submit" onClick={handleSubmit}>Add User</button>
             </form>
           </div>
         </div>

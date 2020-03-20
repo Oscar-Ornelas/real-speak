@@ -69,8 +69,9 @@ function Home(props) {
             private: true
           })
           .then(room => history.push(`/chatapp/${room.id}`))
+        } else {
+          setCurrentRoomId(currentUser.rooms[0].id);
         }
-        setCurrentRoomId(currentUser.rooms[0].id);
       })
     }
   }, [fullUserInfo]);

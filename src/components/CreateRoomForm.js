@@ -47,7 +47,10 @@ function CreateRoomForm(props){
     })
     .catch(err => console.log(err))
     setIsOpen(false);
-    window.location.reload();
+    setTimeout(() => {
+      window.location.reload();
+    }, 100);
+
   }
 
   return (
