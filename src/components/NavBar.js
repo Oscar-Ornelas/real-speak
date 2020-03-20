@@ -1,7 +1,5 @@
 import React from 'react';
-import {Link} from 'react-router-dom';
-import ChatApp from './ChatApp';
-import { useAuth0 } from "../react-auth0-spa";
+import RoomSettingsForm from './RoomSettingsForm';
 
 function NavBar(props) {
   return (
@@ -13,7 +11,7 @@ function NavBar(props) {
         </div>
         <nav className="nav">
           <ul className="nav-list">
-            <li className="nav-item"><i className="fas fa-ellipsis-v"></i></li>
+            <RoomSettingsForm currentRoomId={props.currentRoomId} currentUser={props.currentUser}/>
           </ul>
         </nav>
       </div>

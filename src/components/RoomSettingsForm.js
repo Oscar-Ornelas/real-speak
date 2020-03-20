@@ -32,7 +32,8 @@ function RoomSettingsForm(props) {
 
   return (
     <div>
-      <button onClick={openModal}>Settings</button>
+      <button className="navbar-modal-btn" onClick={openModal}><i className="fas fa-ellipsis-v"></i></button>
+
       <Modal
         isOpen={modalIsOpen}
         onRequestClose={closeModal}

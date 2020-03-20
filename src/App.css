@@ -16,6 +16,10 @@ body {
   height: 100%;
 }
 
+strong {
+  font-weight: 700;
+}
+
 ul {
   list-style-type: none;
   padding: 0;
@@ -52,10 +56,18 @@ ul {
   color: #fff;
   border: none;
   font-size: 1.5rem;
+  cursor: pointer;
 }
 
 .room-header {
   padding: 0 0 0 1em;
+}
+
+.navbar-modal-btn {
+  background: none;
+  border: none;
+  color: #fff;
+  cursor: pointer;
 }
 
 .fa-ellipsis-v {

@@ -6,7 +6,6 @@ import {useAuth0} from "../react-auth0-spa";
 import NavBar from './NavBar';
 import MessageList from './MessageList';
 import Input from './Input';
-import RoomSettingsForm from './RoomSettingsForm';
 
 function ChatApp(props) {
   const [currentUser, setCurrentUser] = useState(null);
@@ -62,11 +61,10 @@ function ChatApp(props) {
 
   return (
     <div>
-      <NavBar toggleSlide={props.toggleSlide} roomName={currentRoom.name}/>
+      <NavBar currentRoomId={currentRoom.id} currentUser={currentUser} toggleSlide={props.toggleSlide} roomName={currentRoom.name}/>
       <div className="chat-box">
       {!(currentRoom.name === undefined) && (
         <>
-          {/*<RoomSettingsForm currentRoomId={currentRoom.id} currentUser={currentUser}/>*/}
           <MessageList messages={messages} roomName={currentRoom.name}/>
           <Input roomName={currentRoom.name} className="input-field" onSubmit={addMessage} />
         </>
