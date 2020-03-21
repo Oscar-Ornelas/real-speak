@@ -37,7 +37,7 @@ function ChatApp(props) {
               hooks: {
                   onMessage: message => {
                       setMessages(prevMessages => [...prevMessages, message])
-                  },
+                  }
               }
           })
       })

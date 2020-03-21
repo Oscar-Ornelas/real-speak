@@ -76,7 +76,7 @@ function CreateRoomForm(props){
               <div className="room-form-inputs">
                 <div className="input-item">
                   <label className="room-form-label" for="roomName">Name</label>
-                  <input className="input" id="roomName" onChange={handleChange} value={roomName} required type="text" name="roomName"/>
+                  <input maxlength="25" className="input" id="roomName" onChange={handleChange} value={roomName} required type="text" name="roomName"/>
                 </div>
               </div>
               <button className="room-form-submit" onClick={handleSubmit} >Create Room</button>
