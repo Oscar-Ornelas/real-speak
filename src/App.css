@@ -89,10 +89,10 @@ ul {
   font-size: 1.25rem;
 }
 
-/* Room SideBar */
-.room-side-nav {
+/* SideBars */
+.room-side-nav,
+.user-side-nav {
   position: fixed;
-  transform: translateX(-100%);
   transition: 250ms transform;
   z-index: 101;
   background: #455a64;
@@ -101,7 +101,17 @@ ul {
   top: 0;
 }
 
-.room-side-nav-open {
+.room-side-nav {
+  transform: translateX(-100%);
+}
+
+.user-side-nav {
+  right: 0;
+  transform: translateX(100%);
+}
+
+.room-side-nav-open,
+.user-side-nav-open {
   transform: translateX(0);
 }
 
@@ -148,7 +158,7 @@ ul {
   left: 0;
   right: 0;
   bottom: 0;
-  background-color: rgba(0, 0, 0, 0.5);
+  background-color: rgba(0, 0, 0, 0.7);
 }
 
 .sidebar-modal-header {

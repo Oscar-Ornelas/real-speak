@@ -11,13 +11,13 @@ function RoomSideBar(props) {
   const { isAuthenticated, loginWithRedirect, logout, user} = useAuth0();
 
   useEffect(() => {
-    function removeNavSlide() {
-      props.setNavSlide(false)
+    function removeRoomNavSlide() {
+      props.setRoomNavSlide(false)
     }
 
-    document.body.addEventListener("click", removeNavSlide);
+    document.body.addEventListener("click", removeRoomNavSlide);
 
-    return () => document.body.removeEventListener("click", removeNavSlide)
+    return () => document.body.removeEventListener("click", removeRoomNavSlide)
   }, [])
 
   useEffect(() => {
@@ -47,7 +47,7 @@ function RoomSideBar(props) {
   return (
     <div className="room-side-bar">
       <div className="room-side-bar-content">
-        <nav className={`room-side-nav ${props.navSlide ? "room-side-nav-open" : ""}`}>
+        <nav className={`room-side-nav ${props.roomNavSlide ? "room-side-nav-open" : ""}`}>
           <div className="room-side-nav-content">
             <h3 className="room-side-nav-list-header">Rooms</h3>
             <ul className="room-side-nav-list">

@@ -5,6 +5,7 @@ import useApiCall from '../views/useApiCall';
 import {useAuth0} from "../react-auth0-spa";
 import NavBar from './NavBar';
 import RoomSideBar from './RoomSideBar';
+import UserSideBar from './UserSideBar';
 import MessageList from './MessageList';
 import Input from './Input';
 
@@ -13,6 +14,8 @@ function ChatApp(props) {
   const [currentRoom, setCurrentRoom] = useState({users: []});
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
+  const [roomNavSlide, setRoomNavSlide] = useState(false);
+  const [userNavSlide, setUserNavSlide] = useState(false);
   const {roomId} = useParams();
 
   useEffect(() => {
@@ -60,17 +63,44 @@ function ChatApp(props) {
     .catch(error => console.error('error', error));
   }
 
+  function toggleRoomNavSlide() {
+    setRoomNavSlide(prevRoomNavSlide => !prevRoomNavSlide);
+  }
+
+  function toggleUserNavSlide() {
+    setUserNavSlide(prevUserNavSlide => !prevUserNavSlide);
+  }
+
   return (
     <div>
       <header>
-        <NavBar currentRoomId={currentRoom.id} currentUser={currentUser} toggleSlide={props.toggleSlide} roomName={currentRoom.name}/>
-        <RoomSideBar setNavSlide={props.setNavSlide} navSlide={props.navSlide} currentId={props.currentId}/>
+        <NavBar
+        currentRoomId={currentRoom.id}
+        currentUser={currentUser}
+        toggleUserNavSlide={toggleUserNavSlide}
+        toggleRoomNavSlide={toggleRoomNavSlide}
+        roomName={currentRoom.name}
+        />
+        <RoomSideBar
+        setRoomNavSlide={setRoomNavSlide}
+        roomNavSlide={roomNavSlide}
+        currentId={props.currentId}
+        />
+        <UserSideBar
+        roomUsers={currentRoom.users}
+        userNavSlide={userNavSlide}
+        setUserNavSlide={setUserNavSlide}
+         />
       </header>
       <main className="chat-box">
       {!(currentRoom.name === undefined) && (
         <>
           <MessageList messages={messages} roomName={currentRoom.name}/>
-          <Input roomName={currentRoom.name} className="input-field" onSubmit={addMessage} />
+          <Input
+          roomName={currentRoom.name}
+          className="input-field"
+          onSubmit={addMessage}
+          />
         </>
       )}
       </main>

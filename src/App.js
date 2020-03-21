@@ -11,12 +11,7 @@ import { default as Chatkit } from '@pusher/chatkit-server';
 import { useAuth0 } from "./react-auth0-spa";
 
 function App() {
-  const [navSlide, setNavSlide] = useState(false);
   const {loading, user, isAuthenticated, loginWithRedirect} = useAuth0();
-
-  function toggleSlide() {
-    setNavSlide(prevNavSlide => !prevNavSlide);
-  }
 
   return (
     <div className="app">
@@ -26,7 +21,7 @@ function App() {
             {!isAuthenticated ? <button onClick={() => loginWithRedirect({})}>Log in</button> : <Home/>}
           </Route>
           <Route path="/chatapp/:roomId">
-            {user && <ChatApp currentId={user.name} setNavSlide={setNavSlide} navSlide={navSlide} toggleSlide={toggleSlide}/>}
+            {user && <ChatApp currentId={user.name}/>}
           </Route>
         </Switch>
       </Router>
