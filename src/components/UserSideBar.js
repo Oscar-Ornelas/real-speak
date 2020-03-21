@@ -17,10 +17,10 @@ function UserSideBar(props) {
       <div className="user-side-bar-content">
         <nav className={`user-side-nav ${props.userNavSlide ? "user-side-nav-open" : ""}`}>
           <div className="user-side-nav-content">
-            <h3 className="user-side-nav-list-header">Users</h3>
+            <h3 className="user-side-nav-list-header">Members</h3>
             <ul className="user-side-nav-list">
               {props.roomUsers.map(user => (
-                <li>{user.name}</li>
+                <li className="user-side-nav-item"><i style={{color: user.presence.state === 'online' ? "green" : "red"}} class="fas fa-circle"></i> {user.name}</li>
               ))}
             </ul>
           </div>

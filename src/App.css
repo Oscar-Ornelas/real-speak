@@ -115,22 +115,32 @@ ul {
   transform: translateX(0);
 }
 
-.room-side-nav-content {
+.room-side-nav-content,
+.user-side-nav-content {
+  font-size: 1.1rem;
   margin: 0 0 0 1em;
 }
 
-.room-side-nav-list-header {
+.room-side-nav-list-header,
+.user-side-nav-list-header {
+  font-size: 1.5rem;
   margin: 1em 0 0.5em;
 }
 
-.room-side-nav-list {
+.room-side-nav-list,
+.user-side-nav-list {
   display: flex;
   flex-direction: column;
   margin: 0 0 0 0.5em;
 }
 
-.room-side-nav-item {
+.room-side-nav-item,
+.user-side-nav-item {
   margin: 0.3em 0;
+}
+
+.fa-circle {
+  font-size: 0.5rem;
 }
 
 .logout-btn {
