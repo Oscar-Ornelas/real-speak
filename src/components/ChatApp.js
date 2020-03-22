@@ -73,37 +73,40 @@ function ChatApp(props) {
 
   return (
     <div>
-      <header>
-        <NavBar
-        currentRoomId={currentRoom.id}
-        currentUser={currentUser}
-        toggleUserNavSlide={toggleUserNavSlide}
-        toggleRoomNavSlide={toggleRoomNavSlide}
-        roomName={currentRoom.name}
-        />
+      <div className="chat-box">
         <RoomSideBar
         setRoomNavSlide={setRoomNavSlide}
         roomNavSlide={roomNavSlide}
         currentId={props.currentId}
         />
+
+        <main className="main">
+          <NavBar
+          currentRoomId={currentRoom.id}
+          currentUser={currentUser}
+          toggleUserNavSlide={toggleUserNavSlide}
+          toggleRoomNavSlide={toggleRoomNavSlide}
+          roomName={currentRoom.name}
+          />
+        {!(currentRoom.name === undefined) && (
+          <>
+            <MessageList messages={messages} roomName={currentRoom.name}/>
+            <Input
+            roomName={currentRoom.name}
+            className="input-field"
+            onSubmit={addMessage}
+            />
+          </>
+        )}
+        </main>
+
         <UserSideBar
         roomUsers={currentRoom.users}
         userNavSlide={userNavSlide}
         setUserNavSlide={setUserNavSlide}
          />
-      </header>
-      <main className="chat-box">
-      {!(currentRoom.name === undefined) && (
-        <>
-          <MessageList messages={messages} roomName={currentRoom.name}/>
-          <Input
-          roomName={currentRoom.name}
-          className="input-field"
-          onSubmit={addMessage}
-          />
-        </>
-      )}
-      </main>
+      </div>
+
     </div>
   )
 }
