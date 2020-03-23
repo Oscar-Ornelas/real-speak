@@ -99,12 +99,16 @@ function ChatApp(props) {
           </>
         )}
         </main>
+        {!(currentRoom.customData === undefined) && (
+          <UserSideBar
+          roomName={currentRoom.name}
+          roomDescription={currentRoom.customData.description}
+          roomUsers={currentRoom.users}
+          userNavSlide={userNavSlide}
+          setUserNavSlide={setUserNavSlide}
+           />
+        )}
 
-        <UserSideBar
-        roomUsers={currentRoom.users}
-        userNavSlide={userNavSlide}
-        setUserNavSlide={setUserNavSlide}
-         />
       </div>
 
     </div>

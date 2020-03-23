@@ -9,7 +9,7 @@ body {
   font-family: 'Roboto', sans-serif;
   background: #37474f;
   color: #fff;
-  overflow-y: hidden;
+  overflow: hidden;
 }
 
 input,
@@ -67,7 +67,7 @@ ul {
   display: flex;
 }
 
-.nav-item {
+.open-user-side-nav {
   font-size: 1.2rem;
   padding: 0 1.25em;
   cursor: pointer;
@@ -88,12 +88,14 @@ ul {
 .room-side-nav,
 .user-side-nav {
   position: fixed;
+  top: 0;
   transition: 250ms transform;
   z-index: 101;
+  width: 225px;
   background: #455a64;
-  min-height: 100vh;
-  width: 250px;
-  top: 0;
+  height: 100vh;
+  overflow-y: auto;
+  padding: 1em 0 0 0;
 }
 
 .room-side-nav {
@@ -113,13 +115,20 @@ ul {
 .room-side-nav-content,
 .user-side-nav-content {
   font-size: 1.1rem;
-  margin: 0 0.5em 0 1em;
+}
+
+.room-side-nav-content {
+  margin: 0 1.25em 0 1em;
+}
+
+.user-side-nav-content {
+  margin: 0 1em 0 1.5em;
 }
 
 .room-side-nav-list-header,
 .user-side-nav-list-header {
   font-size: 1.5rem;
-  margin: 1em 0 0.5em;
+  margin: 0.5em 0 0.5em;
 }
 
 .room-side-nav-list,
@@ -134,31 +143,22 @@ ul {
   margin: 0.3em 0;
 }
 
+.user-side-nav-room-description {
+  line-height: 1.45;
+}
+
 .fa-circle {
   font-size: 0.5rem;
 }
 
-@media (min-width: 700px) {
-  .header {
-    width: 100%;
+@media (min-width: 750px) {
+  .chat-box {
+    display: grid;
+    grid-template-columns: minmax(150px, 500px) minmax(60%, 1fr)  minmax(150px, 500px);
   }
 
   .main {
     grid-column: 2 / 3;
-  }
-
-  .message-list {
-    padding: 0 0 0 1.5rem;
-    margin: 0;
-  }
-
-  .chat-box {
-    display: grid;
-    grid-template-columns: 25% 50% 25%;
-  }
-
-  .navbar {
-    padding: 1em 0 0 0;
   }
 
   .room-side-nav,
@@ -166,7 +166,6 @@ ul {
     transform: translateX(0);
     position: initial;
     width: 100%;
-    padding: 1em 0 0 0;
   }
 
   .room-side-nav {
@@ -175,6 +174,11 @@ ul {
 
   .user-side-nav {
     grid-column: 3 / 4;
+  }
+
+  .open-room-side-nav,
+  .open-user-side-nav {
+    display: none;
   }
 
 }
@@ -316,7 +320,8 @@ ul {
 .message-list {
   width: 100%;
   height: 80%;
-  padding: 0 0 0em 1.5rem;
+  padding: 0 0 1.75em 1.5rem;
+  margin: 0;
   overflow-y: auto;
 }
 

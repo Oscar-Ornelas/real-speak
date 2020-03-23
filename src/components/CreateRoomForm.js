@@ -6,7 +6,7 @@ Modal.setAppElement('#root')
 function CreateRoomForm(props){
   const [currentUser, setCurrentUser] = useState(null);
   const [modalIsOpen,setIsOpen] = useState(false);
-  const [roomName, setRoomName] = useState("");
+  const [formData, setFormData] = useState({roomName: "", roomDescription: ""});
 
 
   useEffect(() => {
@@ -35,15 +35,16 @@ function CreateRoomForm(props){
   }
 
   function handleChange(e) {
-    const {value} = e.target;
-    setRoomName(value);
+    const {value, name} = e.target;
+    setFormData(prevFormData => ({...prevFormData, [name]: value}));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
     currentUser.createRoom({
-      name: roomName,
+      name: formData.roomName,
       private: true,
+      customData: {description: formData.roomDescription}
     })
     .catch(err => console.log(err))
     setIsOpen(false);
@@ -76,7 +77,11 @@ function CreateRoomForm(props){
               <div className="room-form-inputs">
                 <div className="input-item">
                   <label className="room-form-label" for="roomName">Name</label>
-                  <input maxlength="25" className="input" id="roomName" onChange={handleChange} value={roomName} required type="text" name="roomName"/>
+                  <input maxlength="25" className="input" id="roomName" onChange={handleChange} value={formData.roomName} required type="text" name="roomName"/>
+                </div>
+                <div className="input-item">
+                  <label className="room-form-label" for="roomDescription">Description (Optional)</label>
+                  <input maxlength="75" className="input" id="roomDescription" onChange={handleChange} value={formData.roomDescription} type="text" name="roomDescription"/>
                 </div>
               </div>
               <button className="room-form-submit" onClick={handleSubmit} >Create Room</button>

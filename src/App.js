@@ -1,6 +1,7 @@
 import React, {useState} from 'react';
 import {Switch, Route, Router, useHistory} from 'react-router-dom';
 import './App.css';
+import Landing from './components/Landing';
 import Home from './components/Home';
 import ExternalApi from './views/ExternalApi';
 import ChatApp from './components/ChatApp';
@@ -18,7 +19,7 @@ function App() {
       <Router history={browserHistory}>
         <Switch>
           <Route path="/" exact>
-            {!isAuthenticated ? <button onClick={() => loginWithRedirect({})}>Log in</button> : <Home/>}
+            {!isAuthenticated ? <Landing/> : <Home/>}
           </Route>
           <Route path="/chatapp/:roomId">
             {user && <ChatApp currentId={user.name}/>}
