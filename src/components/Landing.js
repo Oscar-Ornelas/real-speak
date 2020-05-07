@@ -12,7 +12,7 @@ function Landing() {
       whether you’re part of a school club, a nightly gaming group, a worldwide
       art community, or just a handful of friends that want to hang out.
       </p>
-      <button onClick={() => loginWithRedirect({})}>Log in</button>
+      <button className="landing-btn" onClick={() => loginWithRedirect({})}>Sign Up</button>
     </div>
   )
 }

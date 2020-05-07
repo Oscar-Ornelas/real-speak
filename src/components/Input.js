@@ -18,7 +18,7 @@ function Input(props) {
     <div className="form-container">
       <div className="form-content">
         <form onSubmit={handleSubmit} className="input-field">
-            <textarea className="message-input" onChange={handleChange} value={message} placeholder={`Message #${props.roomName}`} />
+            <input type="text" className="message-input" onChange={handleChange} value={message} placeholder={`Message #${props.roomName}`} />
             <button className="message-submit"><i className="fas fa-paper-plane"></i></button>
         </form>
       </div>

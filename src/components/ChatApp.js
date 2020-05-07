@@ -1,5 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
+import socketIOClient from "socket.io-client";
 import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import useApiCall from '../views/useApiCall';
 import {useAuth0} from "../react-auth0-spa";
@@ -10,57 +11,55 @@ import MessageList from './MessageList';
 import Input from './Input';
 
 function ChatApp(props) {
+  const token = process.env.REACT_APP_MGMT_API_ACCESS_TOKEN;
+  const [fullUserInfo, setFullUserInfo] = useState({});
   const [currentUser, setCurrentUser] = useState(null);
   const [currentRoom, setCurrentRoom] = useState({users: []});
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [roomNavSlide, setRoomNavSlide] = useState(false);
   const [userNavSlide, setUserNavSlide] = useState(false);
+  const {user} = useAuth0();
   const {roomId} = useParams();
+  const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
-    const chatManager = new ChatManager({
-        instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR_KEY,
-        userId: props.currentId,
-        tokenProvider: new TokenProvider({
-            url: process.env.REACT_APP_TEST_TOKEN
-        })
-    })
+    socket.on("connected", response => {
+      console.log(response);
+    });
 
-    chatManager
-      .connect()
-      .then(currentUser => {
-          setCurrentUser(currentUser);
-          return currentUser.subscribeToRoom({
-              roomId: roomId,
-              messageLimit: 100,
-              hooks: {
-                  onMessage: message => {
-                      setMessages(prevMessages => [...prevMessages, message])
-                  }
-              }
-          })
+    socket.emit("joined_room", roomId);
+
+    socket.on("message", response => {
+      console.log(response);
+      setMessages(prevMessages => [...prevMessages, response]);
+    })
+  }, []);
+
+  useEffect(() => {
+    if(user) {
+      fetch(`https://realspeak.auth0.com/api/v2/users/${user.sub}`, {
+        headers: {
+          Authorization: `Bearer ${token}`
+        }
       })
-      .then(currentRoom => {
-          setCurrentRoom(currentRoom);
-          setUsers(currentRoom.userIds);
-          window.scrollTo(0,document.body.scrollHeight)
+      .then(response => response.json())
+      .then(data => {
+        setFullUserInfo(data);
+        console.log(data);
       })
-      .catch(error => console.log(error))
-  }, [])
+      .catch(err => console.log(err))
+    }
+  }, [user])
 
   useEffect(() => {
     if(messages.length > 0) {
-      window.scrollTo(0,document.body.scrollHeight)
+      window.scrollTo(0, document.body.scrollHeight)
     }
   }, [messages])
 
-  function addMessage(text) {
-    currentUser.sendMessage({
-      text,
-      roomId: currentRoom.id
-    })
-    .catch(error => console.error('error', error));
+  function addMessage(message) {
+    socket.emit("sent_message", message);
   }
 
   function toggleRoomNavSlide() {
@@ -88,16 +87,16 @@ function ChatApp(props) {
           toggleRoomNavSlide={toggleRoomNavSlide}
           roomName={currentRoom.name}
           />
-        {!(currentRoom.name === undefined) && (
-          <>
-            <MessageList messages={messages} roomName={currentRoom.name}/>
-            <Input
-            roomName={currentRoom.name}
-            className="input-field"
-            onSubmit={addMessage}
-            />
-          </>
-        )}
+
+
+          <MessageList messages={messages} roomName={currentRoom.name}/>
+          <Input
+          roomName={currentRoom.name}
+          className="input-field"
+          onSubmit={addMessage}
+          />
+
+
         </main>
         {!(currentRoom.customData === undefined) && (
           <UserSideBar
