@@ -38,7 +38,8 @@ function ChatApp(props) {
 
   useEffect(() => {
     if(user) {
-      fetch(`https://realspeak.auth0.com/api/v2/users/${user.sub}`, {
+      console.log(user);
+      fetch(`https://dev-pdp1v9a4.auth0.com/api/v2/users/${user.sub}`, {
         headers: {
           Authorization: `Bearer ${token}`
         }
