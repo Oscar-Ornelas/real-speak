@@ -47,7 +47,7 @@ function ChatApp(props) {
       .then(response => response.json())
       .then(data => {
         setFullUserInfo(data);
-        console.log(data);
+        console.log(data.username);
       })
       .catch(err => console.log(err))
     }
@@ -59,8 +59,8 @@ function ChatApp(props) {
     }
   }, [messages])
 
-  function addMessage(message) {
-    socket.emit("sent_message", message);
+  function addMessage(messageInfo) {
+    socket.emit("sent_message", messageInfo);
   }
 
   function toggleRoomNavSlide() {
@@ -92,6 +92,7 @@ function ChatApp(props) {
 
           <MessageList messages={messages} roomName={currentRoom.name}/>
           <Input
+          username={fullUserInfo.username}
           roomName={currentRoom.name}
           className="input-field"
           onSubmit={addMessage}

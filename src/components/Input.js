@@ -1,24 +1,32 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 
 function Input(props) {
-  const [message, setMessage] = useState("");
+  const [messageInfo, setMessageInfo] = useState({username: "", timeSent: "", text: ""});
+
+  useEffect(() => {
+    if(props.username) {
+      setMessageInfo(prevMessageInfo => ({...prevMessageInfo, username: props.username}));
+    }
+  }, [props.username]);
 
   function handleChange(e) {
     const {value} = e.target;
-    setMessage(value);
+    setMessageInfo(prevMessageInfo => ({...prevMessageInfo, text: value}));
   }
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSubmit(message);
-    setMessage("");
+    const timeSent = new Date();
+    console.log(timeSent);
+    props.onSubmit(messageInfo);
+    setMessageInfo(prevMessageInfo => ({...prevMessageInfo, timeSent: "", text: ""}));
   }
 
   return (
     <div className="form-container">
       <div className="form-content">
         <form onSubmit={handleSubmit} className="input-field">
-            <input type="text" className="message-input" onChange={handleChange} value={message} placeholder={`Message #${props.roomName}`} />
+            <input type="text" className="message-input" onChange={handleChange} value={messageInfo.text} placeholder={`Message #${props.roomName}`} />
             <button className="message-submit"><i className="fas fa-paper-plane"></i></button>
         </form>
       </div>

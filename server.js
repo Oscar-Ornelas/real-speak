@@ -22,8 +22,8 @@ function onConnect(socket) {
     socket.join(name);
   });
 
-  socket.on("sent_message", message => {
-    io.emit('message', message);
+  socket.on("sent_message", messageInfo => {
+    io.emit('message', messageInfo);
   });
 }
 
