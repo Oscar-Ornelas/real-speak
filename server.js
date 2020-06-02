@@ -15,15 +15,15 @@ const io = socketIo(server);
 io.on("connect", onConnect);
 
 function onConnect(socket) {
-  let name = "";
+  let roomName = "";
   socket.emit("connected", "Hello!");
-  socket.on("joined_room", (name, fn) => {
-    name = name;
-    socket.join(name);
+  socket.on("joined_room", (roomId, fn) => {
+    roomName = roomId;
+    socket.join(roomName);
   });
 
   socket.on("sent_message", messageInfo => {
-    io.emit('message', messageInfo);
+    socket.to(messageInfo.roomId).emit('message', messageInfo);
   });
 }
 

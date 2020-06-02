@@ -60,6 +60,7 @@ function ChatApp(props) {
   }, [messages])
 
   function addMessage(messageInfo) {
+    console.log(messageInfo.roomId);
     socket.emit("sent_message", messageInfo);
   }
 
@@ -92,6 +93,7 @@ function ChatApp(props) {
 
           <MessageList messages={messages} roomName={currentRoom.name}/>
           <Input
+          roomId={roomId}
           username={fullUserInfo.username}
           roomName={currentRoom.name}
           className="input-field"

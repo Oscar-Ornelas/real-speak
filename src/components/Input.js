@@ -1,13 +1,17 @@
 import React, {useState, useEffect} from 'react';
 
 function Input(props) {
-  const [messageInfo, setMessageInfo] = useState({username: "", timeSent: "", text: ""});
+  const [messageInfo, setMessageInfo] = useState({username: "", timeSent: "", text: "", roomId: ""});
 
   useEffect(() => {
     if(props.username) {
       setMessageInfo(prevMessageInfo => ({...prevMessageInfo, username: props.username}));
     }
-  }, [props.username]);
+
+    if(props.roomId) {
+      setMessageInfo(prevMessageInfo => ({...prevMessageInfo, roomId: props.roomId}));
+    }
+  }, [props.username, props.roomId]);
 
   function handleChange(e) {
     const {value} = e.target;
@@ -16,8 +20,6 @@ function Input(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    const timeSent = new Date();
-    console.log(timeSent);
     props.onSubmit(messageInfo);
     setMessageInfo(prevMessageInfo => ({...prevMessageInfo, timeSent: "", text: ""}));
   }
