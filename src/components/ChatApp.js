@@ -19,7 +19,8 @@ function ChatApp(props) {
   const [roomNavSlide, setRoomNavSlide] = useState(false);
   const [userNavSlide, setUserNavSlide] = useState(false);
   const {user} = useAuth0();
-  const {roomId} = useParams();
+  const [roomId, setRoomId] = useState(Math.floor((Math.random() * 9999999) + 1000000));
+  const [roomName, setRoomName] = useState("General");
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
@@ -59,7 +60,6 @@ function ChatApp(props) {
   }, [messages])
 
   function addMessage(messageInfo) {
-    console.log(messageInfo.roomId);
     socket.emit("sent_message", messageInfo);
   }
 
@@ -86,15 +86,15 @@ function ChatApp(props) {
           currentUser={currentUser}
           toggleUserNavSlide={toggleUserNavSlide}
           toggleRoomNavSlide={toggleRoomNavSlide}
-          roomName={currentRoom.name}
+          roomName={roomName}
           />
 
 
-          <MessageList messages={messages} roomName={currentRoom.name}/>
+          <MessageList messages={messages} roomName={roomName}/>
           <Input
           roomId={roomId}
           username={fullUserInfo.username}
-          roomName={currentRoom.name}
+          roomName={roomName}
           className="input-field"
           onSubmit={addMessage}
           />
@@ -103,7 +103,7 @@ function ChatApp(props) {
         </main>
         {!(currentRoom.customData === undefined) && (
           <UserSideBar
-          roomName={currentRoom.name}
+          roomName={roomName}
           roomDescription={currentRoom.customData.description}
           roomUsers={currentRoom.users}
           userNavSlide={userNavSlide}

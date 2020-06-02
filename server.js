@@ -15,11 +15,9 @@ const io = socketIo(server);
 io.on("connect", onConnect);
 
 function onConnect(socket) {
-  let roomName = "";
   socket.emit("connected", "Hello!");
   socket.on("joined_room", (roomId, fn) => {
-    roomName = roomId;
-    socket.join(roomName);
+    socket.join(roomId);
   });
 
   socket.on("sent_message", messageInfo => {
