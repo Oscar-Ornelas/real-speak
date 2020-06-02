@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import socketIOClient from "socket.io-client";
-import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
 import useApiCall from '../views/useApiCall';
 import {useAuth0} from "../react-auth0-spa";
 import NavBar from './NavBar';
