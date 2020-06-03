@@ -24,6 +24,19 @@ function ChatApp(props) {
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
+    const data = {roomId, roomName};
+    fetch("http://localhost:4001/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => console.log("SUCCESS"))
+    .catch(err => console.log(err))
+  }, []);
+
+  useEffect(() => {
     socket.on("connected", response => {
       console.log(response);
     });
