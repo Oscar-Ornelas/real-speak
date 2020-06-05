@@ -29,16 +29,22 @@ mongo.connect(url, {
 
   const collection = db.collection('rooms');
 
-  app.post("/api", (req, res) => {
-    console.log(req.body);
-    collection.insertOne({roomId: JSON.parse(req.body.roomId), users: []}, (err, result) => {
-
+  app.post("/api/findUser", (req, res) => {
+    collection.findOne({user: req.body.userId}, (err, item) => {
+      console.log(item);
+      if(!item) {
+        res.json({isNewUser: true});
+      } else {
+        res.json({isNewUser: false, rooms: item.rooms});
+      }
     });
   });
 
-  /*collection.insertOne({roomId: 11111111, users: []}, (err, result) => {
+  app.post("/api/createUser", (req, res) => {
+    collection.insertOne({user: req.body.userId, rooms: [{id: JSON.parse(req.body.roomId), name: req.body.roomName}]}, (err, result) => {
 
-  });*/
+    });
+  });
 
   collection.find().toArray((err, items) => {
     console.log(items)

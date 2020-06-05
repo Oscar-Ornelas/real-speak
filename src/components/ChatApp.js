@@ -12,28 +12,47 @@ import Input from './Input';
 function ChatApp(props) {
   const token = process.env.REACT_APP_MGMT_API_ACCESS_TOKEN;
   const [fullUserInfo, setFullUserInfo] = useState({});
+  const [userRooms, setUserRooms] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentRoom, setCurrentRoom] = useState({users: []});
   const [messages, setMessages] = useState([]);
   const [users, setUsers] = useState([]);
   const [roomNavSlide, setRoomNavSlide] = useState(false);
   const [userNavSlide, setUserNavSlide] = useState(false);
-  const {user} = useAuth0();
   const [roomId, setRoomId] = useState(Math.floor((Math.random() * 9999999) + 1000000));
-  const [roomName, setRoomName] = useState("General");
+  const [roomName, setRoomName] = useState("");
+  const {user} = useAuth0();
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
-    const data = {roomId, roomName};
-    fetch("http://localhost:4001/api", {
+    const data = {userId: user.name};
+    fetch("http://localhost:4001/api/findUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
       },
       body: JSON.stringify(data)
     })
-    .then(response => console.log("SUCCESS"))
-    .catch(err => console.log(err))
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.isNewUser);
+      if(data.isNewUser) {
+        setRoomName("General");
+        const data = {roomId, roomName: "General", userId: user.name};
+        fetch("http://localhost:4001/api/createUser", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .catch(err => console.log(err))
+      } else {
+        setUserRooms(data.rooms);
+        setRoomName(data.rooms[0].name);
+        setRoomId(data.rooms[0].id);
+      }
+    })
   }, []);
 
   useEffect(() => {
@@ -47,7 +66,7 @@ function ChatApp(props) {
       console.log(response);
       setMessages(prevMessages => [...prevMessages, response]);
     })
-  }, []);
+  }, [roomId]);
 
   useEffect(() => {
     if(user) {
@@ -91,6 +110,7 @@ function ChatApp(props) {
         setRoomNavSlide={setRoomNavSlide}
         roomNavSlide={roomNavSlide}
         currentId={props.currentId}
+        rooms={userRooms}
         />
 
         <main className="main">
