@@ -19,8 +19,8 @@ function ChatApp(props) {
   const [users, setUsers] = useState([]);
   const [roomNavSlide, setRoomNavSlide] = useState(false);
   const [userNavSlide, setUserNavSlide] = useState(false);
-  const [roomId, setRoomId] = useState(Math.floor((Math.random() * 9999999) + 1000000));
-  const [roomName, setRoomName] = useState("");
+  const {roomId} = useParams();
+  const {roomName} = useParams();
   const {user} = useAuth0();
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
@@ -35,23 +35,7 @@ function ChatApp(props) {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data.isNewUser);
-      if(data.isNewUser) {
-        setRoomName("General");
-        const data = {roomId, roomName: "General", userId: user.name};
-        fetch("http://localhost:4001/api/createUser", {
-          method: "POST",
-          headers: {
-            "Content-Type": "application/json"
-          },
-          body: JSON.stringify(data)
-        })
-        .catch(err => console.log(err))
-      } else {
-        setUserRooms(data.rooms);
-        setRoomName(data.rooms[0].name);
-        setRoomId(data.rooms[0].id);
-      }
+      setUserRooms(data.rooms);
     })
   }, []);
 
@@ -110,6 +94,7 @@ function ChatApp(props) {
         setRoomNavSlide={setRoomNavSlide}
         roomNavSlide={roomNavSlide}
         currentId={props.currentId}
+        username={fullUserInfo.username}
         rooms={userRooms}
         />
 

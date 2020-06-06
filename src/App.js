@@ -21,7 +21,7 @@ function App() {
           <Route path="/" exact>
             {!isAuthenticated ? <Landing/> : <Home/>}
           </Route>
-          <Route path="/chatapp">
+          <Route path="/chatapp/:roomName/:roomId">
             {user && <ChatApp currentId={user.name}/>}
           </Route>
         </Switch>

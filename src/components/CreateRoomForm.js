@@ -1,30 +1,12 @@
 import React, {useState, useEffect} from 'react';
-import {ChatManager, TokenProvider} from '@pusher/chatkit-client';
+import { useAuth0 } from "../react-auth0-spa";
 import Modal from 'react-modal';
 Modal.setAppElement('#root')
 
 function CreateRoomForm(props){
-  const [currentUser, setCurrentUser] = useState(null);
+  const {user} = useAuth0();
   const [modalIsOpen,setIsOpen] = useState(false);
   const [formData, setFormData] = useState({roomName: "", roomDescription: ""});
-
-
-  useEffect(() => {
-    const chatManager = new ChatManager({
-        instanceLocator: process.env.REACT_APP_CHATKIT_INSTANCE_LOCATOR_KEY,
-        userId: props.currentId,
-        tokenProvider: new TokenProvider({
-            url: process.env.REACT_APP_TEST_TOKEN
-        })
-    })
-
-    chatManager
-      .connect()
-      .then(currentUser => {
-          setCurrentUser(currentUser);
-      })
-      .catch(error => console.log(error))
-  }, [])
 
   function openModal() {
     setIsOpen(true);
@@ -40,13 +22,17 @@ function CreateRoomForm(props){
   }
 
   function handleSubmit(e) {
+    const roomId = Math.floor((Math.random() * 9999999) + 1000000);
+    const roomName = formData.roomName;
+    const data = {userId: user.name, roomId, roomName, username: props.username};
     e.preventDefault();
-    currentUser.createRoom({
-      name: formData.roomName,
-      private: true,
-      customData: {description: formData.roomDescription}
+    fetch("http://localhost:4001/api/updateUser", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
     })
-    .catch(err => console.log(err))
     setIsOpen(false);
     setTimeout(() => {
       window.location.reload();
@@ -56,7 +42,6 @@ function CreateRoomForm(props){
 
   return (
     <div>
-    {!(currentUser === null)  && (
       <>
       <p onClick={openModal} className="sidebar-modal-header">+ Add a room</p>
       <Modal
@@ -90,7 +75,7 @@ function CreateRoomForm(props){
         </div>
       </Modal>
       </>
-    )}
+
 
     </div>
   );

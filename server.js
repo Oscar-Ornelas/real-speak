@@ -41,9 +41,20 @@ mongo.connect(url, {
   });
 
   app.post("/api/createUser", (req, res) => {
-    collection.insertOne({user: req.body.userId, rooms: [{id: JSON.parse(req.body.roomId), name: req.body.roomName}]}, (err, result) => {
-
+    collection.insertOne({
+      user: req.body.userId,
+      rooms: [{id: JSON.parse(req.body.roomId), name: req.body.roomName,
+             users: [{id: req.body.userId, username: req.body.username}]}]}, (err, result) => {
     });
+  });
+
+  app.post("/api/updateUser", (req, res) => {
+    collection.findOneAndUpdate({
+      user: req.body.userId},
+      {$push : {rooms: {id: JSON.parse(req.body.roomId), name: req.body.roomName,
+                users: [{id: req.body.userId, username: req.body.username}]}}}, (err, item) => {
+      console.log(item);
+    })
   });
 
   collection.find().toArray((err, items) => {
