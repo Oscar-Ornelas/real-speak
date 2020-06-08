@@ -23,12 +23,15 @@ function RoomSettingsForm(props) {
   }
 
   function addUser(e) {
+    const data = {userId: formData.userId, roomId: props.roomId};
     e.preventDefault();
-    props.currentUser.addUserToRoom({
-      userId: formData.newUserId,
-      roomId: props.currentRoomId
+    fetch("http://localhost:4001/api/addUserToRoom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
     })
-    .catch(err => console.log(err))
     setIsOpen(false);
     setFormData(prevFormData => ({...prevFormData, newUserId: ""}));
   }
@@ -98,15 +101,15 @@ function RoomSettingsForm(props) {
               <div className="room-form-inputs">
 
                 <div className="input-item">
-                  <label className="room-form-label" for="newUserId">Add user</label>
+                  <label className="room-form-label" for="userId">Add user</label>
                   <input
                     placeholder="User Id (Email)"
                     className="input"
-                    id="newUserId"
+                    id="userId"
                     onChange={handleChange}
-                    value={formData.newUserId}
+                    value={formData.userId}
                     type="text"
-                    name="newUserId"
+                    name="userId"
                   />
                 </div>
                 <button className="room-form-submit" onClick={addUser}>Add User</button>

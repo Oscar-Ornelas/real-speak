@@ -30,7 +30,7 @@ mongo.connect(url, {
   const collection = db.collection('rooms');
 
   app.post("/api/findUser", (req, res) => {
-    collection.findOne({user: req.body.userId}, (err, item) => {
+    collection.findOne({userId: req.body.userId}, (err, item) => {
       if(!item) {
         res.json({isNewUser: true});
       } else {
@@ -46,6 +46,14 @@ mongo.connect(url, {
     });
   });
 
+  app.post("/api/addUserToRoom", (req, res) => {
+    collection.findOneAndUpdate({userId: req.body.userId}, {$push: {rooms: req.body.roomId}}, (err, item) => {
+      collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$push: {users: {id: req.body.userId, username: item.username}}}, (err, item) => {
+
+      });
+    });
+  });
+
   app.post("/api/createUser", (req, res) => {
     collection.insertOne({
       roomId: JSON.parse(req.body.roomId),
@@ -54,7 +62,8 @@ mongo.connect(url, {
     });
 
     collection.insertOne({
-      user: req.body.userId,
+      userId: req.body.userId,
+      username: req.body.username,
       rooms: [req.body.roomId]
     });
   });
@@ -67,7 +76,7 @@ mongo.connect(url, {
     });
 
     collection.findOneAndUpdate({
-      user: req.body.userId},
+      userId: req.body.userId},
       {$push: {rooms: req.body.roomId}}, (err, item) => {
         console.log(item);
     });

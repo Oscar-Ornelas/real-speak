@@ -127,7 +127,7 @@ function ChatApp(props) {
 
         <main className="main">
           <NavBar
-          currentRoomId={currentRoom.id}
+          roomId={roomId}
           currentUser={currentUser}
           toggleUserNavSlide={toggleUserNavSlide}
           toggleRoomNavSlide={toggleRoomNavSlide}
