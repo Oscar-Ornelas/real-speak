@@ -13,6 +13,7 @@ function ChatApp(props) {
   const token = process.env.REACT_APP_MGMT_API_ACCESS_TOKEN;
   const [fullUserInfo, setFullUserInfo] = useState({});
   const [userRooms, setUserRooms] = useState([]);
+  const [roomUsers, setRoomUsers] = useState([]);
   const [currentUser, setCurrentUser] = useState(null);
   const [currentRoom, setCurrentRoom] = useState({users: []});
   const [messages, setMessages] = useState([]);
@@ -25,6 +26,22 @@ function ChatApp(props) {
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
+    const data = {roomId};
+    fetch("http://localhost:4001/api/findRoom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => {
+      console.log(data.users)
+      setRoomUsers(data.users)
+    })
+  }, []);
+
+  useEffect(() => {
     const data = {userId: user.name};
     fetch("http://localhost:4001/api/findUser", {
       method: "POST",
@@ -35,7 +52,18 @@ function ChatApp(props) {
     })
     .then(response => response.json())
     .then(data => {
-      setUserRooms(data.rooms);
+      data.rooms.forEach(room => {
+        const data = {roomId: room}
+        fetch("http://localhost:4001/api/findRoom", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => setUserRooms(prevUserRooms => [...prevUserRooms, data]));
+      })
     })
   }, []);
 
@@ -63,7 +91,6 @@ function ChatApp(props) {
       .then(response => response.json())
       .then(data => {
         setFullUserInfo(data);
-        console.log(data.username);
       })
       .catch(err => console.log(err))
     }
@@ -119,16 +146,14 @@ function ChatApp(props) {
 
 
         </main>
-        {!(currentRoom.customData === undefined) && (
           <UserSideBar
           roomName={roomName}
-          roomDescription={currentRoom.customData.description}
-          roomUsers={currentRoom.users}
+          rooms={userRooms}
+          roomDescription={"asdasd"}
+          roomUsers={roomUsers}
           userNavSlide={userNavSlide}
           setUserNavSlide={setUserNavSlide}
            />
-        )}
-
       </div>
 
     </div>

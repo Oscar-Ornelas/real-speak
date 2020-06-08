@@ -14,6 +14,20 @@ import { useAuth0 } from "./react-auth0-spa";
 function App() {
   const {loading, user, isAuthenticated, loginWithRedirect} = useAuth0();
 
+  /*useEffect(() => {
+    const data = {roomId: 8773944};
+    fetch("http://localhost:4001/api/findRoom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(response => response.json())
+    .then(data => console.log(data))
+    .catch(err => console.log(err))
+  }, []);*/
+
   return (
     <div className="app">
       <Router history={browserHistory}>

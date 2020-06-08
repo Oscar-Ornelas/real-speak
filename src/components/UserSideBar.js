@@ -23,7 +23,7 @@ function UserSideBar(props) {
             <ul className="user-side-nav-list">
               {props.roomUsers.map(user => (
                 <li key={user.id} className="user-side-nav-item">
-                  <i style={{color: user.presence.state === 'online' ? "#66FF00" : "#FF0000"}} className="fas fa-circle"></i> {user.name}
+                  {/*<i style={{color: user.presence.state === 'online' ? "#66FF00" : "#FF0000"}} className="fas fa-circle"></i>*/} {user.username}
                 </li>
               ))}
             </ul>

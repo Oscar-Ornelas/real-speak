@@ -11,6 +11,7 @@ function Home(props) {
   const {user} = useAuth0();
 
   useEffect(() => {
+
     if(user) {
       console.log(user);
       fetch(`https://dev-pdp1v9a4.auth0.com/api/v2/users/${user.sub}`, {
@@ -27,7 +28,7 @@ function Home(props) {
   }, [user])
 
   useEffect(() => {
-    if(user) {
+    if(user && username) {
       const data = {userId: user.name};
       fetch("http://localhost:4001/api/findUser", {
         method: "POST",
@@ -37,9 +38,8 @@ function Home(props) {
         body: JSON.stringify(data)
       })
       .then(response => response.json())
-      .then(data => {
-        console.log(data.isNewUser);
-        if(data.isNewUser) {
+      .then(responseData => {
+        if(responseData.isNewUser) {
           setRoomName("General");
           const data = {roomId, roomName: "General", userId: user.name, username};
           fetch("http://localhost:4001/api/createUser", {
@@ -52,11 +52,24 @@ function Home(props) {
           .then(() => history.push(`/chatapp/${roomName}/${roomId}`))
           .catch(err => console.log(err))
         } else {
-          history.push(`/chatapp/${data.rooms[0].name}/${data.rooms[0].id}`)
+          const data = {roomId: responseData.rooms[0]};
+          fetch("http://localhost:4001/api/findRoom", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(data => {
+            console.log(data);
+            history.push(`/chatapp/${data.roomName}/${data.roomId}`)
+          })
+          .catch(err => console.log(err))
         }
       });
     }
-  }, [user]);
+  }, [user, username]);
 
   return (
     <div>

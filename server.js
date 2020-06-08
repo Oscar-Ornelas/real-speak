@@ -31,7 +31,6 @@ mongo.connect(url, {
 
   app.post("/api/findUser", (req, res) => {
     collection.findOne({user: req.body.userId}, (err, item) => {
-      console.log(item);
       if(!item) {
         res.json({isNewUser: true});
       } else {
@@ -40,26 +39,43 @@ mongo.connect(url, {
     });
   });
 
+  app.post("/api/findRoom", (req, res) => {
+    collection.findOne({roomId: JSON.parse(req.body.roomId)}, (err, item) => {
+      console.log(item)
+      res.json({roomId: item.roomId, roomName: item.roomName, users: item.users})
+    });
+  });
+
   app.post("/api/createUser", (req, res) => {
     collection.insertOne({
+      roomId: JSON.parse(req.body.roomId),
+      roomName: req.body.roomName,
+      users: [{id: req.body.userId, username: req.body.username}]}, (err, result) => {
+    });
+
+    collection.insertOne({
       user: req.body.userId,
-      rooms: [{id: JSON.parse(req.body.roomId), name: req.body.roomName,
-             users: [{id: req.body.userId, username: req.body.username}]}]}, (err, result) => {
+      rooms: [req.body.roomId]
     });
   });
 
   app.post("/api/updateUser", (req, res) => {
+    collection.insertOne({
+      roomId: JSON.parse(req.body.roomId),
+      roomName: req.body.roomName,
+      users: [{id: req.body.userId, username: req.body.username}]}, (err, result) => {
+    });
+
     collection.findOneAndUpdate({
       user: req.body.userId},
-      {$push : {rooms: {id: JSON.parse(req.body.roomId), name: req.body.roomName,
-                users: [{id: req.body.userId, username: req.body.username}]}}}, (err, item) => {
-      console.log(item);
-    })
+      {$push: {rooms: req.body.roomId}}, (err, item) => {
+        console.log(item);
+    });
   });
 
-  collection.find().toArray((err, items) => {
+  /*collection.find().toArray((err, items) => {
     console.log(items)
-  });
+  });*/
 
 })
 

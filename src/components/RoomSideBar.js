@@ -32,7 +32,7 @@ function RoomSideBar(props) {
             <h3 className="room-side-nav-list-header">Rooms</h3>
             <ul className="room-side-nav-list">
               {props.rooms.map(room => (
-                <li key={room.id} onClick={reloadPage} className="room-side-nav-item"><Link className="link" to={`/chatapp/${room.name}/${room.id}`}># {room.name}</Link></li>
+                <li key={room.roomId} onClick={reloadPage} className="room-side-nav-item"><Link className="link" to={`/chatapp/${room.roomName}/${room.roomId}`}># {room.roomName}</Link></li>
               ))}
               {user && <CreateRoomForm username={props.username} currentId={user.name}/>}
               {user && <JoinRoomForm currentId={user.name}/>}
