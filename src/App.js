@@ -1,5 +1,5 @@
 import React, {useState, useEffect} from 'react';
-import {Switch, Route, Router, useHistory} from 'react-router-dom';
+import {Switch, Route, HashRouter as Router, useHistory} from 'react-router-dom';
 import './App.css';
 import Landing from './components/Landing';
 import Home from './components/Home';
