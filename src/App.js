@@ -16,7 +16,7 @@ function App() {
 
   return (
     <div className="app">
-      <Router history={browserHistory}>
+      <Router basename="/real-speak" history={browserHistory}>
         <Switch>
           <Route path="/" exact>
             {!isAuthenticated ? <Landing/> : <Home/>}
