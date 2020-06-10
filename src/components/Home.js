@@ -49,7 +49,7 @@ function Home(props) {
             },
             body: JSON.stringify(data)
           })
-          .then(() => history.push(`/chatapp/${roomName}/${roomId}`))
+          .then(() => history.push(`/real-speak/chatapp/${roomName}/${roomId}`))
           .catch(err => console.log(err))
         } else {
           const data = {roomId: responseData.rooms[0]};
@@ -63,7 +63,7 @@ function Home(props) {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            history.push(`/chatapp/${data.roomName}/${data.roomId}`)
+            history.push(`/real-speak/chatapp/${data.roomName}/${data.roomId}`)
           })
           .catch(err => console.log(err))
         }
