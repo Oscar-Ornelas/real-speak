@@ -25,12 +25,6 @@ function ChatApp(props) {
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
-    if(props.access_token) {
-      console.log(props.access_token);
-    } else {
-      console.log("NO TOKEN")
-    }
-
     const data = {roomId};
     fetch("http://localhost:4001/api/findRoom", {
       method: "POST",

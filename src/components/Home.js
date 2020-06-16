@@ -60,7 +60,7 @@ function Home(props) {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            history.push(`/real-speak/chatapp/${data.roomName}/${data.roomId}`)
+            history.push(`/chatapp/${data.roomName}/${data.roomId}`)
           })
           .catch(err => console.log(err))
         }
