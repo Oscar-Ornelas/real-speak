@@ -3,7 +3,6 @@ import {useHistory, Redirect} from 'react-router-dom';
 import { useAuth0 } from "../react-auth0-spa";
 
 function Home(props) {
-  const token = process.env.REACT_APP_MGMT_API_ACCESS_TOKEN;
   const [roomId, setRoomId] = useState(Math.floor((Math.random() * 9999999) + 1000000));
   const [roomName, setRoomName] = useState("");
   const [username, setUsername] = useState(null);
@@ -11,12 +10,10 @@ function Home(props) {
   const {user} = useAuth0();
 
   useEffect(() => {
-
-    if(user) {
-      console.log(user);
+    if(user && props.access_token) {
       fetch(`https://dev-pdp1v9a4.auth0.com/api/v2/users/${user.sub}`, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${props.access_token}`
         }
       })
       .then(response => response.json())
@@ -25,7 +22,7 @@ function Home(props) {
       })
       .catch(err => console.log(err))
     }
-  }, [user])
+  }, [user, props.access_token])
 
   useEffect(() => {
     if(user && username) {
@@ -63,7 +60,7 @@ function Home(props) {
           .then(response => response.json())
           .then(data => {
             console.log(data);
-            history.push(`/chatapp/${data.roomName}/${data.roomId}`)
+            history.push(`/real-speak/chatapp/${data.roomName}/${data.roomId}`)
           })
           .catch(err => console.log(err))
         }

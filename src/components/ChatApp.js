@@ -10,7 +10,6 @@ import MessageList from './MessageList';
 import Input from './Input';
 
 function ChatApp(props) {
-  const token = process.env.REACT_APP_MGMT_API_ACCESS_TOKEN;
   const [fullUserInfo, setFullUserInfo] = useState({});
   const [userRooms, setUserRooms] = useState([]);
   const [roomUsers, setRoomUsers] = useState([]);
@@ -26,6 +25,12 @@ function ChatApp(props) {
   const socket = socketIOClient(`http://127.0.0.1:4001`);
 
   useEffect(() => {
+    if(props.access_token) {
+      console.log(props.access_token);
+    } else {
+      console.log("NO TOKEN")
+    }
+
     const data = {roomId};
     fetch("http://localhost:4001/api/findRoom", {
       method: "POST",
@@ -81,11 +86,11 @@ function ChatApp(props) {
   }, [roomId]);
 
   useEffect(() => {
-    if(user) {
+    if(user && props.access_token) {
       console.log(user);
       fetch(`https://dev-pdp1v9a4.auth0.com/api/v2/users/${user.sub}`, {
         headers: {
-          Authorization: `Bearer ${token}`
+          Authorization: `Bearer ${props.access_token}`
         }
       })
       .then(response => response.json())
@@ -94,7 +99,7 @@ function ChatApp(props) {
       })
       .catch(err => console.log(err))
     }
-  }, [user])
+  }, [user, props.access_token])
 
   useEffect(() => {
     if(messages.length > 0) {

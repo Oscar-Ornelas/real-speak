@@ -1,4 +1,5 @@
 const express = require("express");
+const request = require("request");
 const mongo = require('mongodb').MongoClient;
 const http = require("http");
 const cors = require("cors");
@@ -15,6 +16,31 @@ app.use(index);
 app.use(express.json());
 
 const server = http.createServer(app);
+
+let access_token = "";
+
+const options = {
+  method: 'POST',
+  url: 'https://dev-pdp1v9a4.auth0.com/oauth/token',
+  headers: {'content-type': 'application/x-www-form-urlencoded'},
+  form: {
+    grant_type: 'client_credentials',
+    client_id: '8Yjxilx9qldnHipHryE81gsbj09qLJb6',
+    client_secret: '-KEN7h9qjLhW2tYEMnbzavnOE3lAwzANfxxVeAkorwzh2WQOnE2wi3xqtGCG1a5q',
+    audience: 'https://dev-pdp1v9a4.auth0.com/api/v2/'
+  }
+};
+
+request(options, function (error, response, body) {
+  if (error) throw new Error(error);
+
+  access_token = JSON.parse(body).access_token;
+});
+
+app.get("/api/getAccessToken", (req, res) => {
+  console.log(access_token);
+  res.json({access_token})
+});
 
 mongo.connect(url, {
     useNewUrlParser: true,
