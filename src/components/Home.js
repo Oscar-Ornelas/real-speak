@@ -27,7 +27,7 @@ function Home(props) {
   useEffect(() => {
     if(user && username) {
       const data = {userId: user.name};
-      fetch("http://localhost:4001/api/findUser", {
+      fetch("/api/findUser", {
         method: "POST",
         headers: {
           "Content-Type": "application/json"
@@ -39,7 +39,7 @@ function Home(props) {
         if(responseData.isNewUser) {
           setRoomName("General");
           const data = {roomId, roomName: "General", userId: user.name, username};
-          fetch("http://localhost:4001/api/createUser", {
+          fetch("/api/createUser", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
@@ -50,7 +50,7 @@ function Home(props) {
           .catch(err => console.log(err))
         } else {
           const data = {roomId: responseData.rooms[0]};
-          fetch("http://localhost:4001/api/findRoom", {
+          fetch("/api/findRoom", {
             method: "POST",
             headers: {
               "Content-Type": "application/json"
