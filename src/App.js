@@ -8,7 +8,6 @@ import ChatApp from './components/ChatApp';
 import RoomSideBar from './components/RoomSideBar';
 import browserHistory from "./utils/history";
 
-import { default as Chatkit } from '@pusher/chatkit-server';
 import { useAuth0 } from "./react-auth0-spa";
 
 function App() {
