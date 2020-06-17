@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Modal from 'react-modal';
-import DeleteRoomForm from './DeleteRoomForm';
 Modal.setAppElement('#root');
 
 function RoomSettingsForm(props) {
@@ -61,23 +60,6 @@ function RoomSettingsForm(props) {
         window.location.reload();
       }, 100);
     }
-  }
-
-  function deleteRoom(e) {
-    e.preventDefault();
-    setIsOpen(false);
-    let newRoomId = "";
-    props.currentUser.deleteRoom({roomId: props.currentRoomId})
-    .then(() => {
-      props.currentUser.rooms.forEach(room => {
-        if(room.id !== props.currentRoomId) {
-          newRoomId = room.id;
-          console.log(newRoomId);
-        }
-      })
-      newRoomId === "" ? history.push("/") : history.push(`/chatapp/${newRoomId}`);
-      window.location.reload();
-    })
   }
 
   return (
@@ -142,7 +124,6 @@ function RoomSettingsForm(props) {
                 </div>
                 <button className="room-form-submit" onClick={changeRoomName}>Change Name</button>
 
-                <DeleteRoomForm roomName={props.roomName} deleteRoom={deleteRoom}/>
               </div>
             </form>
           </div>

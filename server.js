@@ -10,7 +10,6 @@ const url = 'mongodb://localhost:27017';
 const index = require("./routes/index");
 
 const app = express();
-app.use(cors({ origin: 'http://localhost:3000' }));
 
 var allowedOrigins = ['http://localhost:3000',
                       'https://real-speak.herokuapp.com'];
