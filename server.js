@@ -1,5 +1,6 @@
 const express = require("express");
 const request = require("request");
+const path = require('path')
 const mongo = require('mongodb').MongoClient;
 const http = require("http");
 const cors = require("cors");
@@ -27,6 +28,7 @@ app.use(cors({
 
 app.use(index);
 app.use(express.json());
+app.use(express.static(path.join(__dirname, 'build')))
 
 const server = http.createServer(app);
 
