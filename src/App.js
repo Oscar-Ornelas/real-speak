@@ -15,7 +15,7 @@ function App() {
   const {loading, user, isAuthenticated, loginWithRedirect} = useAuth0();
 
   useEffect(() => {
-    fetch("http://localhost:4001/api/getAccessToken")
+    fetch("/api/getAccessToken")
     .then(response => response.json())
     .then(data => {
       console.log(data);
