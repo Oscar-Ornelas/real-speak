@@ -3,6 +3,7 @@
   "name": "real-speak",
   "version": "0.1.0",
   "private": true,
+  "proxy": "http://localhost:4001",
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.4",
     "@pusher/chatkit-client": "^1.14.1",
@@ -26,7 +27,6 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "heroku-postbuild": "cd client && npm install && npm install --only=dev --no-shrinkwrap && npm run build",
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",

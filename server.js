@@ -28,7 +28,7 @@ app.use(cors({
 
 app.use(index);
 app.use(express.json());
-app.use(express.static(path.join(__dirname, 'build')))
+app.use(express.static(path.join(__dirname, 'public')))
 
 const server = http.createServer(app);
 
