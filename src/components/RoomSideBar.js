@@ -4,7 +4,6 @@ import { useAuth0 } from "../react-auth0-spa";
 import CreateRoomForm from './CreateRoomForm';
 
 function RoomSideBar(props) {
-  const [currentUser, setCurrentUser] = useState(null);
   const { isAuthenticated, loginWithRedirect, logout, user} = useAuth0();
 
   useEffect(() => {
@@ -33,7 +32,7 @@ function RoomSideBar(props) {
               {props.rooms.map(room => (
                 <li key={room.roomId} onClick={reloadPage} className="room-side-nav-item"><Link className="link" to={`/chatapp/${room.roomName}/${room.roomId}`}># {room.roomName}</Link></li>
               ))}
-              {user && <CreateRoomForm username={props.username} currentId={user.name}/>}
+              {user && <CreateRoomForm username={props.username}/>}
             </ul>
           </div>
 

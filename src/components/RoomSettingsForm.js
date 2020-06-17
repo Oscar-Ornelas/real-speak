@@ -35,33 +35,6 @@ function RoomSettingsForm(props) {
     setFormData(prevFormData => ({...prevFormData, newUserId: ""}));
   }
 
-  function removeUser(e) {
-    e.preventDefault();
-    props.currentUser.removeUserFromRoom({
-      userId: formData.userId,
-      roomId: props.currentRoomId
-    })
-    .catch(err => console.log(err))
-    setIsOpen(false);
-    setFormData(prevFormData => ({...prevFormData, userId: ""}));
-  }
-
-  function changeRoomName(e) {
-    e.preventDefault();
-    if(formData.newRoomName.length > 0) {
-      props.currentUser.updateRoom({
-        roomId: props.currentRoomId,
-        name: formData.newRoomName
-      })
-      .catch(err => console.log(err))
-      setIsOpen(false);
-      setFormData(prevFormData => ({...prevFormData, newRoomName: ""}));
-      setTimeout(() => {
-        window.location.reload();
-      }, 100);
-    }
-  }
-
   return (
     <div>
       <button className="navbar-modal-btn" onClick={openModal}><i className="fas fa-ellipsis-v"></i></button>
@@ -96,7 +69,7 @@ function RoomSettingsForm(props) {
                 </div>
                 <button className="room-form-submit" onClick={addUser}>Add User</button>
 
-                <div className="input-item">
+                {/*<div className="input-item">
                   <label className="room-form-label" for="userId">Remove user</label>
                   <input
                     placeholder="User Id (Email)"
@@ -108,22 +81,8 @@ function RoomSettingsForm(props) {
                     name="userId"
                   />
                 </div>
-                <button className="room-form-submit" onClick={removeUser}>Remove User</button>
-
-                <div className="input-item">
-                  <label className="room-form-label" for="newRoomName">Change room name</label>
-                  <input
-                    placeholder="e.g. plan-event"
-                    className="input"
-                    id="newRoomName"
-                    onChange={handleChange}
-                    value={formData.newRoomName}
-                    type="text"
-                    name="newRoomName"
-                  />
-                </div>
-                <button className="room-form-submit" onClick={changeRoomName}>Change Name</button>
-
+                <button className="room-form-submit" onClick={"Remove User"}>Remove User</button>
+              */}
               </div>
             </form>
           </div>

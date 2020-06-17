@@ -13,10 +13,7 @@ function ChatApp(props) {
   const [fullUserInfo, setFullUserInfo] = useState({});
   const [userRooms, setUserRooms] = useState([]);
   const [roomUsers, setRoomUsers] = useState([]);
-  const [currentUser, setCurrentUser] = useState(null);
-  const [currentRoom, setCurrentRoom] = useState({users: []});
   const [messages, setMessages] = useState([]);
-  const [users, setUsers] = useState([]);
   const [roomNavSlide, setRoomNavSlide] = useState(false);
   const [userNavSlide, setUserNavSlide] = useState(false);
   const {roomId} = useParams();
@@ -119,7 +116,6 @@ function ChatApp(props) {
         <RoomSideBar
         setRoomNavSlide={setRoomNavSlide}
         roomNavSlide={roomNavSlide}
-        currentId={props.currentId}
         username={fullUserInfo.username}
         rooms={userRooms}
         />
@@ -127,7 +123,6 @@ function ChatApp(props) {
         <main className="main">
           <NavBar
           roomId={roomId}
-          currentUser={currentUser}
           toggleUserNavSlide={toggleUserNavSlide}
           toggleRoomNavSlide={toggleRoomNavSlide}
           roomName={roomName}
@@ -139,8 +134,8 @@ function ChatApp(props) {
           roomId={roomId}
           username={fullUserInfo.username}
           roomName={roomName}
-          className="input-field"
           onSubmit={addMessage}
+          className="input-field"
           />
 
 

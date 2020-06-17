@@ -32,7 +32,7 @@ function App() {
             {!isAuthenticated ? <Landing/> : <Home access_token={accessToken}/>}
           </Route>
           <Route path="/chatapp/:roomName/:roomId">
-            {user && <ChatApp access_token={accessToken} currentId={user.name}/>}
+            {user && <ChatApp access_token={accessToken}/>}
           </Route>
         </Switch>
       </Router>
