@@ -13,7 +13,11 @@ const app = express();
 
 const server = http.createServer(app);
 
-var allowedOrigins = ['http://localhost:3000',
+
+app.use(express.static(path.join(__dirname, 'build')));
+app.use(express.json());
+
+const allowedOrigins = ['http://localhost:4001',
                       'https://real-speak.herokuapp.com'];
 app.use(cors({
   origin: function(origin, callback){
@@ -26,15 +30,6 @@ app.use(cors({
     return callback(null, true);
   }
 }));
-
-app.use(express.json());
-app.use(express.static(path.join(__dirname, 'build')));
-
-if(process.env.NODE_ENV === "production") {
-  app.get("*", (req, res) => {
-    res.sendFile(path.resolve(__dirname,  "build", "index.html"));
-  });
-}
 
 let access_token = "";
 
