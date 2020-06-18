@@ -23,7 +23,7 @@ function ChatApp(props) {
 
   useEffect(() => {
     const data = {roomId};
-    fetch("http://localhost:4001/api/findRoom", {
+    fetch("/api/findRoom", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -39,7 +39,7 @@ function ChatApp(props) {
 
   useEffect(() => {
     const data = {userId: user.name};
-    fetch("http://localhost:4001/api/findUser", {
+    fetch("/api/findUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -50,7 +50,7 @@ function ChatApp(props) {
     .then(data => {
       data.rooms.forEach(room => {
         const data = {roomId: room}
-        fetch("http://localhost:4001/api/findRoom", {
+        fetch("/api/findRoom", {
           method: "POST",
           headers: {
             "Content-Type": "application/json"
