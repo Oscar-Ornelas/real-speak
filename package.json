@@ -3,6 +3,9 @@
   "name": "real-speak",
   "version": "0.1.0",
   "private": true,
+  "engines": {
+    "node": "12.x"
+  },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.4",
     "@pusher/chatkit-client": "^1.14.1",
