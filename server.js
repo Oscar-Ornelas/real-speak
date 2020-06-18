@@ -8,9 +8,10 @@ const socketIo = require("socket.io");
 
 const port = process.env.PORT || 4001;
 const url = 'mongodb://localhost:27017';
-const index = require("./routes/index");
 
 const app = express();
+
+const server = http.createServer(app);
 
 var allowedOrigins = ['http://localhost:3000',
                       'https://real-speak.herokuapp.com'];
@@ -26,18 +27,17 @@ app.use(cors({
   }
 }));
 
-app.use(index);
 app.use(express.json());
+app.use(express.static("build"));
+app.use(express.static("public"));
 
 if(process.env.NODE_ENV === "production") {
-  app.use(express.static("build"));
+
 
   app.get("*", (req, res) => {
     res.sendFile(path.resolve(__dirname,  "build", "index.html"));
   });
 }
-
-const server = http.createServer(app);
 
 let access_token = "";
 
