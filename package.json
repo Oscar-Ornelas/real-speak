@@ -1,5 +1,5 @@
 {
-  "homepage": "http://Oscar-Ornelas.github.io/real-speak",
+  "homepage": "https://real-speak.herokuapp.com/",
   "name": "real-speak",
   "version": "0.1.0",
   "private": true,
@@ -34,7 +34,8 @@
     "predeploy": "npm run build",
     "deploy": "gh-pages -d build",
     "dev": "npm-run-all --parallel start server",
-    "server": "node server.js"
+    "server": "node server.js",
+    "heroku-postbuild": "npm install --prefix client && npm run build --prefix client"
   },
   "eslintConfig": {
     "extends": "react-app"
