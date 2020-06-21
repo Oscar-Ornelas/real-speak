@@ -7,12 +7,11 @@ const cors = require("cors");
 const socketIo = require("socket.io");
 
 const port = process.env.PORT || 4001;
-const url = 'mongodb+srv://OscarO:Eyn6guOTK29GacAa@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority';
+const url = `mongodb+srv://OscarO:${process.env.REACT_APP_MONGODB_PASSWORD}@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority`;
 
 const app = express();
 
 const server = http.createServer(app);
-
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
