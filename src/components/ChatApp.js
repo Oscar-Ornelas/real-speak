@@ -143,7 +143,6 @@ function ChatApp(props) {
           <UserSideBar
           roomName={roomName}
           rooms={userRooms}
-          roomDescription={"asdasd"}
           roomUsers={roomUsers}
           userNavSlide={userNavSlide}
           setUserNavSlide={setUserNavSlide}
