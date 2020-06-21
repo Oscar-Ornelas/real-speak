@@ -7,7 +7,6 @@ const server = http.createServer(app);
 const cors = require("cors");
 const dotenv = require('dotenv');
 dotenv.config();
-const socketIo = require("socket.io");
 const mongo = require('mongodb').MongoClient;
 
 const port = process.env.PORT || 4001;
@@ -128,7 +127,7 @@ mongo.connect(url, {
 
 })
 
-const io = socketIo(server);
+const io = require("socket.io").listen(server);
 io.set('origins', '*:*');
 
 io.on("connect", onConnect);
