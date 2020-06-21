@@ -1,6 +1,14 @@
-import React from 'react';
+import React, {useRef, useEffect} from 'react';
 
 function MessageList(props) {
+  const messagesEnd = useRef(null);
+
+  useEffect(scrollToBottom, [props.messages]);
+
+  function scrollToBottom() {
+    messagesEnd.current.scrollIntoView({ behavior: "smooth" })
+  }
+
   return (
     <ul className="message-list">
         {props.messages.length === 0 && (
@@ -17,7 +25,7 @@ function MessageList(props) {
             </div>
           </li>
         ))}
-        <li></li>
+        <li ref={messagesEnd}></li>
     </ul>
   )
 }

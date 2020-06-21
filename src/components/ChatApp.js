@@ -71,7 +71,6 @@ function ChatApp(props) {
     socket.emit("joined_room", roomId);
 
     socket.on("message", response => {
-      console.log(response);
       setMessages(prevMessages => [...prevMessages, response]);
     })
   }, [roomId]);
@@ -91,12 +90,6 @@ function ChatApp(props) {
       .catch(err => console.log(err))
     }
   }, [user, props.access_token])
-
-  useEffect(() => {
-    if(messages.length > 0) {
-      window.scrollTo(0, document.body.scrollHeight)
-    }
-  }, [messages])
 
   function addMessage(messageInfo) {
     socket.emit("sent_message", messageInfo);
