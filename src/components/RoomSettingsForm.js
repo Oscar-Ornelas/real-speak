@@ -35,6 +35,22 @@ function RoomSettingsForm(props) {
     setFormData(prevFormData => ({...prevFormData, userId: ""}));
   }
 
+  function leaveRoom(e) {
+    console.log(props.userId);
+    const data = {userId: props.userId, roomId: props.roomId};
+    e.preventDefault();
+    fetch("/api/removeUserFromRoom", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify(data)
+    })
+    .then(() => history.push("/"))
+    setIsOpen(false);
+
+  }
+
   return (
     <div>
       <button className="navbar-modal-btn" onClick={openModal}><i className="fas fa-ellipsis-v"></i></button>
@@ -80,9 +96,9 @@ function RoomSettingsForm(props) {
                     type="text"
                     name="userId"
                   />
-                </div>
-                <button className="room-form-submit" onClick={"Remove User"}>Remove User</button>
-              */}
+                </div> */}
+                <button className="room-form-submit" onClick={leaveRoom}>Remove User</button>
+
               </div>
             </form>
           </div>

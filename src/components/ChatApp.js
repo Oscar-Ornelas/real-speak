@@ -13,6 +13,7 @@ function ChatApp(props) {
   const [fullUserInfo, setFullUserInfo] = useState({});
   const [userRooms, setUserRooms] = useState([]);
   const [roomUsers, setRoomUsers] = useState([]);
+  const [userId, setUserId] = useState("");
   const [roomDescription, setRoomDescription] = useState("");
   const [messages, setMessages] = useState([]);
   const [roomNavSlide, setRoomNavSlide] = useState(false);
@@ -33,7 +34,7 @@ function ChatApp(props) {
     })
     .then(response => response.json())
     .then(data => {
-      console.log(data.users)
+
       setRoomDescription(data.roomDescription);
       setRoomUsers(data.users)
     })
@@ -50,6 +51,7 @@ function ChatApp(props) {
     })
     .then(response => response.json())
     .then(data => {
+      setUserId(data.userId);
       data.rooms.forEach(room => {
         const data = {roomId: room}
         fetch("/api/findRoom", {
@@ -118,6 +120,7 @@ function ChatApp(props) {
         <main className="main">
           <NavBar
           roomId={roomId}
+          userId={userId}
           toggleUserNavSlide={toggleUserNavSlide}
           toggleRoomNavSlide={toggleRoomNavSlide}
           roomName={roomName}

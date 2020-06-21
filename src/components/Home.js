@@ -49,6 +49,18 @@ function Home(props) {
           .then(response => response.json())
           .then(data => history.push(`/chatapp/${data.roomName}/${data.roomId}`))
           .catch(err => console.log(err))
+        } else if(!responseData.isNewUser && responseData.rooms.length < 1) {
+          const data = {roomId, roomName: "General", roomDescription: "Your very first room! Welcome to RealSpeak.", userId: user.name, username};
+          fetch("/api/updateUser", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(data => history.push(`/chatapp/${data.roomName}/${data.roomId}`))
+          .catch(err => console.log(err))
         } else {
           const data = {roomId: responseData.rooms[0]};
           fetch("/api/findRoom", {

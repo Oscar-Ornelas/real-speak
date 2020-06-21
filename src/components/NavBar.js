@@ -13,7 +13,7 @@ function NavBar(props) {
           <nav className="nav">
             <ul className="nav-list">
               <li className="nav-item open-user-side-nav" onClick={props.toggleUserNavSlide}><i className="fas fa-user-friends"></i></li>
-              <RoomSettingsForm roomName={props.roomName} roomId={props.roomId}/>
+              <RoomSettingsForm roomName={props.roomName} userId={props.userId} roomId={props.roomId}/>
             </ul>
           </nav>
         </div>

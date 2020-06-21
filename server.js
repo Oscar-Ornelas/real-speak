@@ -73,7 +73,7 @@ mongo.connect(url, {
       if(!item) {
         res.json({isNewUser: true});
       } else {
-        res.json({isNewUser: false, rooms: item.rooms});
+        res.json({isNewUser: false, rooms: item.rooms, userId: item.userId});
       }
     });
   });
@@ -90,6 +90,16 @@ mongo.connect(url, {
       collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$push: {users: {id: req.body.userId, username: item.value.username}}}, (err, item) => {
 
       });
+    });
+  });
+
+  app.post("/api/removeUserFromRoom", (req, res) => {
+    console.log(req.body.roomId)
+    collection.findOneAndUpdate({userId: req.body.userId}, {$pull: {rooms: JSON.parse(req.body.roomId)}}, (err, item) => {
+      res.json({message: "successful"})
+    });
+
+    collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$pull: {users: {id: req.body.userId}}}, (err, item) => {
     });
   });
 
@@ -120,7 +130,7 @@ mongo.connect(url, {
     collection.findOneAndUpdate({
       userId: req.body.userId},
       {$push: {rooms: req.body.roomId}}, (err, item) => {
-        console.log(item);
+        res.json({roomName: req.body.roomName, roomId: req.body.roomId});
     });
   });
 

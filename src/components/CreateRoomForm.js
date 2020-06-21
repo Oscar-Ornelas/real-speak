@@ -1,4 +1,5 @@
 import React, {useState, useEffect} from 'react';
+import {useHistory} from 'react-router-dom';
 import { useAuth0 } from "../react-auth0-spa";
 import Modal from 'react-modal';
 Modal.setAppElement('#root')
@@ -7,6 +8,7 @@ function CreateRoomForm(props){
   const {user} = useAuth0();
   const [modalIsOpen,setIsOpen] = useState(false);
   const [formData, setFormData] = useState({roomName: "", roomDescription: ""});
+  const history = useHistory();
 
   function openModal() {
     setIsOpen(true);
@@ -34,11 +36,10 @@ function CreateRoomForm(props){
       },
       body: JSON.stringify(data)
     })
+    .then(response => response.json())
+    .then(data => history.push(`/chatapp/${data.roomName}/${data.roomId}`))
+    .catch(err => console.log(err))
     setIsOpen(false);
-    setTimeout(() => {
-      window.location.reload();
-    }, 100);
-
   }
 
   return (
