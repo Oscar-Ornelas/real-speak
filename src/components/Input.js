@@ -20,7 +20,9 @@ function Input(props) {
 
   function handleSubmit(e) {
     e.preventDefault();
-    props.onSubmit(messageInfo);
+    if(messageInfo.text.trim().length > 0) {
+      props.onSubmit(messageInfo);
+    }
     setMessageInfo(prevMessageInfo => ({...prevMessageInfo, timeSent: "", text: ""}));
   }
 

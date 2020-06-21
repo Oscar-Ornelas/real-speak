@@ -13,10 +13,11 @@ const port = process.env.PORT || 4001;
 const url = `mongodb+srv://OscarO:${process.env.MONGODB_PASSWORD}@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority`;
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+/*app.use(express.static(path.join(__dirname, 'build')));*/
 app.use(express.json());
 
 const allowedOrigins = ['http://localhost:4001',
+                      'http://localhost:3000',
                       'https://real-speak.herokuapp.com'];
 app.use(cors({
   origin: function(origin, callback){
@@ -143,8 +144,10 @@ function onConnect(socket) {
   });
 }
 
+/*
 app.get('*', function (req, res) {
   res.sendFile(path.join(__dirname, 'build', 'index.html'));
 });
+*/
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
