@@ -7,7 +7,7 @@ const cors = require("cors");
 const socketIo = require("socket.io");
 
 const port = process.env.PORT || 4001;
-const url = 'mongodb://localhost:27017';
+const url = 'mongodb+srv://OscarO:Eyn6guOTK29GacAa@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority';
 
 const app = express();
 
@@ -142,5 +142,9 @@ function onConnect(socket) {
     socket.to(messageInfo.roomId).emit('message', messageInfo);
   });
 }
+
+app.get('*', function (req, res) {
+  res.sendFile(path.join(__dirname, 'build', 'index.html'));
+});
 
 server.listen(port, () => console.log(`Listening on port ${port}`));
