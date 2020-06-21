@@ -13,6 +13,7 @@ function ChatApp(props) {
   const [fullUserInfo, setFullUserInfo] = useState({});
   const [userRooms, setUserRooms] = useState([]);
   const [roomUsers, setRoomUsers] = useState([]);
+  const [roomDescription, setRoomDescription] = useState("");
   const [messages, setMessages] = useState([]);
   const [roomNavSlide, setRoomNavSlide] = useState(false);
   const [userNavSlide, setUserNavSlide] = useState(false);
@@ -33,6 +34,7 @@ function ChatApp(props) {
     .then(response => response.json())
     .then(data => {
       console.log(data.users)
+      setRoomDescription(data.roomDescription);
       setRoomUsers(data.users)
     })
   }, []);
@@ -137,6 +139,7 @@ function ChatApp(props) {
           roomName={roomName}
           rooms={userRooms}
           roomUsers={roomUsers}
+          roomDescription={roomDescription}
           userNavSlide={userNavSlide}
           setUserNavSlide={setUserNavSlide}
            />

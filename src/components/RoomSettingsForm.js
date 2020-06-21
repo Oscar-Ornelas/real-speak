@@ -32,7 +32,7 @@ function RoomSettingsForm(props) {
       body: JSON.stringify(data)
     })
     setIsOpen(false);
-    setFormData(prevFormData => ({...prevFormData, newUserId: ""}));
+    setFormData(prevFormData => ({...prevFormData, userId: ""}));
   }
 
   return (

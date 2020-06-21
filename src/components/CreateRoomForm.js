@@ -24,7 +24,8 @@ function CreateRoomForm(props){
   function handleSubmit(e) {
     const roomId = Math.floor((Math.random() * 9999999) + 1000000);
     const roomName = formData.roomName;
-    const data = {userId: user.name, roomId, roomName, username: props.username};
+    const roomDescription = formData.roomDescription;
+    const data = {userId: user.name, roomId, roomName, roomDescription, username: props.username};
     e.preventDefault();
     fetch("/api/updateUser", {
       method: "POST",

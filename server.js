@@ -52,7 +52,6 @@ request(options, function (error, response, body) {
 });
 
 app.get("/api/getAccessToken", (req, res) => {
-  console.log(access_token);
   res.json({access_token})
 });
 
@@ -82,13 +81,13 @@ mongo.connect(url, {
   app.post("/api/findRoom", (req, res) => {
     collection.findOne({roomId: JSON.parse(req.body.roomId)}, (err, item) => {
       console.log(item)
-      res.json({roomId: item.roomId, roomName: item.roomName, users: item.users})
+      res.json({roomId: item.roomId, roomDescription: item.roomDescription, roomName: item.roomName, users: item.users})
     });
   });
 
   app.post("/api/addUserToRoom", (req, res) => {
     collection.findOneAndUpdate({userId: req.body.userId}, {$push: {rooms: req.body.roomId}}, (err, item) => {
-      collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$push: {users: {id: req.body.userId, username: item.username}}}, (err, item) => {
+      collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$push: {users: {id: req.body.userId, username: item.value.username}}}, (err, item) => {
 
       });
     });
@@ -98,7 +97,9 @@ mongo.connect(url, {
     collection.insertOne({
       roomId: JSON.parse(req.body.roomId),
       roomName: req.body.roomName,
+      roomDescription: req.body.roomDescription,
       users: [{id: req.body.userId, username: req.body.username}]}, (err, result) => {
+        res.json({roomName: req.body.roomName, roomId: req.body.roomId});
     });
 
     collection.insertOne({
@@ -112,6 +113,7 @@ mongo.connect(url, {
     collection.insertOne({
       roomId: JSON.parse(req.body.roomId),
       roomName: req.body.roomName,
+      roomDescription: req.body.roomDescription,
       users: [{id: req.body.userId, username: req.body.username}]}, (err, result) => {
     });
 

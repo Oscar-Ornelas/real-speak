@@ -38,7 +38,7 @@ function Home(props) {
       .then(responseData => {
         if(responseData.isNewUser) {
           setRoomName("General");
-          const data = {roomId, roomName: "General", userId: user.name, username};
+          const data = {roomId, roomName: "General", roomDescription: "Your very first room! Welcome to RealSpeak.", userId: user.name, username};
           fetch("/api/createUser", {
             method: "POST",
             headers: {
@@ -46,7 +46,8 @@ function Home(props) {
             },
             body: JSON.stringify(data)
           })
-          .then(() => history.push(`/chatapp/${roomName}/${roomId}`))
+          .then(response => response.json())
+          .then(data => history.push(`/chatapp/${data.roomName}/${data.roomId}`))
           .catch(err => console.log(err))
         } else {
           const data = {roomId: responseData.rooms[0]};

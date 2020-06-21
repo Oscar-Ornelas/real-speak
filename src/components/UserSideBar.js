@@ -18,7 +18,7 @@ function UserSideBar(props) {
         <nav className={`user-side-nav ${props.userNavSlide ? "user-side-nav-open" : ""}`}>
           <div className="user-side-nav-content">
             <h3 className="user-side-nav-list-header"># {props.roomName}</h3>
-            {/*<p className="user-side-nav-room-description">{props.roomDescription}</p>*/}
+            <p className="user-side-nav-room-description">{props.roomDescription}</p>
             <h3 className="user-side-nav-list-header">Members</h3>
             <ul className="user-side-nav-list">
               {props.roomUsers.map(user => (
