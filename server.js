@@ -129,6 +129,7 @@ mongo.connect(url, {
 })
 
 const io = socketIo(server);
+io.set('origins', '*:*');
 
 io.on("connect", onConnect);
 
