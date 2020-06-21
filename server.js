@@ -1,17 +1,18 @@
 const express = require("express");
+const app = express();
 const request = require("request");
 const path = require('path')
-const mongo = require('mongodb').MongoClient;
 const http = require("http");
+const server = http.createServer(app);
 const cors = require("cors");
+const dotenv = require('dotenv');
+dotenv.config();
 const socketIo = require("socket.io");
+const mongo = require('mongodb').MongoClient;
 
 const port = process.env.PORT || 4001;
-const url = `mongodb+srv://OscarO:${process.env.REACT_APP_MONGODB_PASSWORD}@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority`;
+const url = `mongodb+srv://OscarO:${process.env.MONGODB_PASSWORD}@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority`;
 
-const app = express();
-
-const server = http.createServer(app);
 
 app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
