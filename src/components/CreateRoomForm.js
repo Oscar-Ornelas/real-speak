@@ -26,7 +26,7 @@ function CreateRoomForm(props){
     const roomName = formData.roomName;
     const data = {userId: user.name, roomId, roomName, username: props.username};
     e.preventDefault();
-    fetch("http://localhost:4001/api/updateUser", {
+    fetch("/api/updateUser", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"

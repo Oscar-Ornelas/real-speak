@@ -24,7 +24,7 @@ function RoomSettingsForm(props) {
   function addUser(e) {
     const data = {userId: formData.userId, roomId: props.roomId};
     e.preventDefault();
-    fetch("http://localhost:4001/api/addUserToRoom", {
+    fetch("/api/addUserToRoom", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
