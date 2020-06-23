@@ -53,14 +53,21 @@ ul {
 .logo {
   margin: 0;
   padding: 0;
+  font-size: 2.5rem;
+}
+
+.landing-header {
+  margin: 0.25em 0 0.8em 0;
 }
 
 .landing-subtitle {
-  margin: 0;
-  line-height: 1.6;
+  margin: 0 0.5em;
+  line-height: 1.8;
+  max-width: 900px;
 }
 
-.landing-btn {
+.landing-btn,
+.landing-btn:visited {
   padding: 10px 20px;
   margin: 1.5em 0 0 0;
   border: none;
@@ -69,6 +76,8 @@ ul {
   cursor: pointer;
   transform: scale(1);
   transition: transform 250ms;
+  font-size: 0.9rem;
+  font-weight: 700;
 }
 
 .landing-btn:hover
@@ -99,6 +108,7 @@ ul {
 
 .room-header {
   padding: 0 0 0 1em;
+  font-size: 1.6rem;
 }
 
 .nav-list {
@@ -152,20 +162,20 @@ ul {
 
 .room-side-nav-content,
 .user-side-nav-content {
-  font-size: 1.1rem;
+  font-size: 1.3rem;
 }
 
 .room-side-nav-content {
-  margin: 0 1.25em 0 1em;
+  margin: 0 1em 0 1em;
 }
 
 .user-side-nav-content {
-  margin: 0 1em 0 1.5em;
+  margin: 0 1em 0 1.25em;
 }
 
 .room-side-nav-list-header,
 .user-side-nav-list-header {
-  font-size: 1.5rem;
+  font-size: 1.75rem;
   margin: 0.5em 0 0.5em;
 }
 
@@ -187,6 +197,11 @@ ul {
 
 .fa-circle {
   font-size: 0.5rem;
+}
+
+.logout-btn {
+  position: fixed;
+  bottom: 0;
 }
 
 @media (min-width: 750px) {
@@ -236,6 +251,7 @@ ul {
   margin: -50px 0 0 -100px;
   width: 200px;
   height: 40px;
+  border-radius: 5px;
 }
 
 /* Modals */
@@ -304,12 +320,6 @@ ul {
   margin: 1em 0 0 0;
 }
 
-.delete-form-container {
-  display: flex;
-  flex-direction: column;
-  text-align: center;
-}
-
 .room-form {
   display: flex;
   flex-direction: column;
@@ -346,7 +356,8 @@ ul {
   box-shadow: 0px 0px 5px rgba(160, 202, 226, 1);
 }
 
-.room-form-submit {
+.room-form-submit,
+.logout-btn {
   margin: 0 0 0 auto;
   padding: 8px 6px;
   border-radius: 4px;
@@ -356,19 +367,10 @@ ul {
   cursor: pointer;
 }
 
-.delete-room-modal {
-  display: flex;
-  flex-direction: column;
-}
-
 .room-form-delete {
   background: #C60202;
   color: #fff;
   margin: 1.25em auto 0 auto;
-}
-
-.delete-disclaimer {
-  font-size: 1.25rem;
 }
 
 /*Message List*/
@@ -380,16 +382,20 @@ ul {
   overflow-y: auto;
 }
 
+.message-item-content {
+  margin: 0 0.8em 0 0;
+}
+
 .message-sender {
-  font-size: 1rem;
+  font-size: 1.15rem;
   margin: 1.25em 0 0.3em 0;
 }
 
 .message-text {
   word-break: break-all;
-  color: #f2f2f2;
+  color: #f3f3f3;
   margin: 5px 0;
-  max-width: 350px;
+  max-width: 450px;
 }
 
 .message-welcome {

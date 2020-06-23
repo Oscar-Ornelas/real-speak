@@ -13,7 +13,7 @@ const port = process.env.PORT || 4001;
 const url = `mongodb+srv://OscarO:${process.env.MONGODB_PASSWORD}@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority`;
 
 
-app.use(express.static(path.join(__dirname, 'build')));
+/*app.use(express.static(path.join(__dirname, 'build')));*/
 app.use(express.json());
 
 const allowedOrigins = ['http://localhost:4001',

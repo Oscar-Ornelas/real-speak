@@ -21,7 +21,7 @@ function ChatApp(props) {
   const {roomId} = useParams();
   const {roomName} = useParams();
   const {user} = useAuth0();
-  const socket = socketIOClient();
+  const socket = socketIOClient("http://localhost:4001");
 
   useEffect(() => {
     const data = {roomId};
@@ -77,13 +77,15 @@ function ChatApp(props) {
     socket.on("message", response => {
       const data = {roomId, message: response};
       setMessages(prevMessages => [...prevMessages, response]);
-      fetch("/api/addMessage", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json"
-        },
-        body: JSON.stringify(data)
-      })
+      setTimeout(() => {
+        fetch("/api/addMessage", {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json"
+          },
+          body: JSON.stringify(data)
+        })
+      }, 250);
     })
   }, [roomId]);
 

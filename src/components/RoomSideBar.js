@@ -36,11 +36,6 @@ function RoomSideBar(props) {
             </ul>
           </div>
 
-
-          {!isAuthenticated && (
-            <button onClick={() => loginWithRedirect({})}>Log in</button>
-          )}
-
           {isAuthenticated && <button className="logout-btn" onClick={() => logout()}>Log out</button>}
         </nav>
       </div>
