@@ -3,7 +3,6 @@ import {Switch, Route, Router, useHistory} from 'react-router-dom';
 import './App.css';
 import Landing from './components/Landing';
 import Home from './components/Home';
-import ExternalApi from './views/ExternalApi';
 import ChatApp from './components/ChatApp';
 import RoomSideBar from './components/RoomSideBar';
 import browserHistory from "./utils/history";
@@ -17,10 +16,7 @@ function App() {
   useEffect(() => {
     fetch("/api/getAccessToken")
     .then(response => response.json())
-    .then(data => {
-      console.log(data);
-      setAccessToken(data.access_token);
-    })
+    .then(data => setAccessToken(data.access_token))
     .catch(err => console.log(err))
   }, []);
 

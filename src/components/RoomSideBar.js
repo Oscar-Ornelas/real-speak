@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import {Link} from 'react-router-dom';
 import { useAuth0 } from "../react-auth0-spa";
 import CreateRoomForm from './CreateRoomForm';
@@ -19,7 +19,7 @@ function RoomSideBar(props) {
   function reloadPage() {
     setTimeout(() => {
       window.location.reload();
-    }, 10)
+    }, 100)
   }
 
   return (

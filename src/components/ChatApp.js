@@ -1,7 +1,6 @@
 import React, {useState, useEffect} from 'react';
 import {useParams} from 'react-router-dom';
 import socketIOClient from "socket.io-client";
-import useApiCall from '../views/useApiCall';
 import {useAuth0} from "../react-auth0-spa";
 import NavBar from './NavBar';
 import RoomSideBar from './RoomSideBar';
@@ -21,7 +20,7 @@ function ChatApp(props) {
   const {roomId} = useParams();
   const {roomName} = useParams();
   const {user} = useAuth0();
-  const socket = socketIOClient("http://localhost:4001");
+  const socket = socketIOClient();
 
   useEffect(() => {
     const data = {roomId};
@@ -68,10 +67,6 @@ function ChatApp(props) {
   }, []);
 
   useEffect(() => {
-    socket.on("connected", response => {
-      console.log(response);
-    });
-
     socket.emit("joined_room", roomId);
 
     socket.on("message", response => {
@@ -91,7 +86,6 @@ function ChatApp(props) {
 
   useEffect(() => {
     if(user && props.access_token) {
-      console.log(user);
       fetch(`https://dev-pdp1v9a4.auth0.com/api/v2/users/${user.sub}`, {
         headers: {
           Authorization: `Bearer ${props.access_token}`

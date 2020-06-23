@@ -13,7 +13,7 @@ const port = process.env.PORT || 4001;
 const url = `mongodb+srv://OscarO:${process.env.MONGODB_PASSWORD}@real-speak.f9p00.mongodb.net/rooms?retryWrites=true&w=majority`;
 
 
-/*app.use(express.static(path.join(__dirname, 'build')));*/
+app.use(express.static(path.join(__dirname, 'build')));
 app.use(express.json());
 
 const allowedOrigins = ['http://localhost:4001',
@@ -80,7 +80,6 @@ mongo.connect(url, {
 
   app.post("/api/findRoom", (req, res) => {
     collection.findOne({roomId: JSON.parse(req.body.roomId)}, (err, item) => {
-      console.log(item)
       res.json({roomId: item.roomId, roomDescription: item.roomDescription, roomName: item.roomName, users: item.users, messages: item.roomMessages})
     });
   });
@@ -98,7 +97,6 @@ mongo.connect(url, {
   });
 
   app.post("/api/removeUserFromRoom", (req, res) => {
-    console.log(req.body.roomId)
     collection.findOneAndUpdate({userId: req.body.userId}, {$pull: {rooms: JSON.parse(req.body.roomId)}}, (err, item) => {
       res.json({message: "successful"})
     });
@@ -124,7 +122,7 @@ mongo.connect(url, {
     });
   });
 
-  app.post("/api/updateUser", (req, res) => {
+  app.post("/api/addRoom", (req, res) => {
     collection.insertOne({
       roomId: JSON.parse(req.body.roomId),
       roomName: req.body.roomName,
@@ -147,10 +145,6 @@ mongo.connect(url, {
         console.log(item);
     });
   });
-
-  /*collection.find().toArray((err, items) => {
-    console.log(items)
-  });*/
 
 })
 

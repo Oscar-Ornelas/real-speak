@@ -8,8 +8,6 @@
   },
   "dependencies": {
     "@auth0/auth0-spa-js": "^1.6.4",
-    "@pusher/chatkit-client": "^1.14.1",
-    "@pusher/chatkit-server": "^2.4.0",
     "@testing-library/jest-dom": "^4.2.4",
     "@testing-library/react": "^9.5.0",
     "@testing-library/user-event": "^7.2.1",
@@ -31,8 +29,7 @@
     "socket.io-client": "^2.3.0"
   },
   "scripts": {
-    "start": "react-scripts start",
-    "server": "node server.js",
+    "start": "node server.js",
     "build": "react-scripts build",
     "heroku-postbuild": "npm install && npm run build",
     "test": "react-scripts test",

@@ -1,11 +1,11 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import Modal from 'react-modal';
 import FlashMessage from './FlashMessage';
 Modal.setAppElement('#root');
 
 function RoomSettingsForm(props) {
-  const [formData, setFormData] = useState({newUserID: "", userId: "", newRoomName: ""});
+  const [formData, setFormData] = useState({userId: ""});
   const [successfulAdd, setSuccessfulAdd] = useState(false);
   const [display, setDisplay] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
@@ -82,7 +82,7 @@ function RoomSettingsForm(props) {
               <div className="room-form-inputs">
 
                 <div className="input-item">
-                  <label className="room-form-label" for="userId">Add user</label>
+                  <label className="room-form-label" htmlFor="userId">Add user</label>
                   <input
                     placeholder="User Id (Email)"
                     className="input"

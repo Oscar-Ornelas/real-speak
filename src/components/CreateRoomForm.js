@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import {useHistory} from 'react-router-dom';
 import { useAuth0 } from "../react-auth0-spa";
 import Modal from 'react-modal';
@@ -29,7 +29,7 @@ function CreateRoomForm(props){
     const roomDescription = formData.roomDescription;
     const data = {userId: user.name, roomId, roomName, roomDescription, username: props.username};
     e.preventDefault();
-    fetch("/api/updateUser", {
+    fetch("/api/addRoom", {
       method: "POST",
       headers: {
         "Content-Type": "application/json"
@@ -66,11 +66,11 @@ function CreateRoomForm(props){
             <form className="room-form">
               <div className="room-form-inputs">
                 <div className="input-item">
-                  <label className="room-form-label" for="roomName">Name</label>
+                  <label className="room-form-label" htmlFor="roomName">Name</label>
                   <input maxlength="25" className="input" id="roomName" onChange={handleChange} value={formData.roomName} required type="text" name="roomName"/>
                 </div>
                 <div className="input-item">
-                  <label className="room-form-label" for="roomDescription">Description (Optional)</label>
+                  <label className="room-form-label" htmlFor="roomDescription">Description (Optional)</label>
                   <input maxLength="75" className="input" id="roomDescription" onChange={handleChange} value={formData.roomDescription} type="text" name="roomDescription"/>
                 </div>
               </div>

@@ -194,11 +194,7 @@ ul {
 .user-side-nav-room-description {
   line-height: 1.45;
 }
-
-.fa-circle {
-  font-size: 0.5rem;
-}
-
+ 
 .logout-btn {
   position: fixed;
   bottom: 0;
