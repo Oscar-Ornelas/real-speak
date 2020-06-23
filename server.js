@@ -86,10 +86,14 @@ mongo.connect(url, {
   });
 
   app.post("/api/addUserToRoom", (req, res) => {
-    collection.findOneAndUpdate({userId: req.body.userId}, {$push: {rooms: req.body.roomId}}, (err, item) => {
-      collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$push: {users: {id: req.body.userId, username: item.value.username}}}, (err, item) => {
-
-      });
+    collection.findOneAndUpdate({userId: req.body.userId}, {$addToSet: {rooms: req.body.roomId}}, (err, item) => {
+      if(item.value === null) {
+        res.json({successfulAdd: false})
+      } else {
+        collection.findOneAndUpdate({roomId: JSON.parse(req.body.roomId)}, {$addToSet: {users: {id: req.body.userId, username: item.value.username}}}, (err, item) => {
+          res.json({successfulAdd: true})
+        });
+      }
     });
   });
 
@@ -156,10 +160,10 @@ function onConnect(socket) {
   });
 }
 
-/*
-app.get('*', function (req, res) {
-  res.sendFile(path.join(__dirname, 'build', 'index.html'));
-});
-*/
+if(process.env.NODE_ENV === "production") {
+  app.get('*', function (req, res) {
+    res.sendFile(path.join(__dirname, 'build', 'index.html'));
+  });
+}
 
 server.listen(port, () => console.log(`Listening on port ${port}`));

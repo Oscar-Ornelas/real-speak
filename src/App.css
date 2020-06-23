@@ -221,6 +221,23 @@ ul {
 
 }
 
+/*Flash Message*/
+.flash-message {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+}
+
+.flash-message-content {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  margin: -50px 0 0 -100px;
+  width: 200px;
+  height: 40px;
+}
+
 /* Modals */
 .modal {
   position: absolute;

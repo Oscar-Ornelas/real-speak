@@ -37,7 +37,10 @@ function CreateRoomForm(props){
       body: JSON.stringify(data)
     })
     .then(response => response.json())
-    .then(data => history.push(`/chatapp/${data.roomName}/${data.roomId}`))
+    .then(data => {
+      history.push(`/chatapp/${data.roomName}/${data.roomId}`);
+      window.location.reload();
+    })
     .catch(err => console.log(err))
     setIsOpen(false);
   }

@@ -1,10 +1,13 @@
 import React, {useState, useEffect} from 'react';
 import {useHistory} from 'react-router-dom';
 import Modal from 'react-modal';
+import FlashMessage from './FlashMessage';
 Modal.setAppElement('#root');
 
 function RoomSettingsForm(props) {
   const [formData, setFormData] = useState({newUserID: "", userId: "", newRoomName: ""});
+  const [successfulAdd, setSuccessfulAdd] = useState(false);
+  const [display, setDisplay] = useState(false);
   const [modalIsOpen,setIsOpen] = useState(false);
   const history = useHistory();
 
@@ -31,6 +34,12 @@ function RoomSettingsForm(props) {
       },
       body: JSON.stringify(data)
     })
+    .then(response => response.json())
+    .then(data => {
+      setSuccessfulAdd(data.successfulAdd);
+      setDisplay(true);
+      setTimeout(() => setDisplay(false), 2500);
+    })
     setIsOpen(false);
     setFormData(prevFormData => ({...prevFormData, userId: ""}));
   }
@@ -53,6 +62,7 @@ function RoomSettingsForm(props) {
 
   return (
     <div>
+      <FlashMessage display={display} successfulAdd={successfulAdd}/>
       <button className="navbar-modal-btn" onClick={openModal}><i className="fas fa-ellipsis-v"></i></button>
 
       <Modal
