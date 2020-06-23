@@ -142,7 +142,6 @@ mongo.connect(url, {
     collection.findOneAndUpdate({
       roomId: JSON.parse(req.body.roomId)},
       {$push: {roomMessages: req.body.message}}, (err, item) => {
-        console.log(item);
     });
   });
 
