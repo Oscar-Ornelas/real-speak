@@ -17,10 +17,11 @@ function MessageList(props) {
             <p>Welcome to the <strong># {props.roomName}</strong> room!</p>
           </li>
         )}
-        {props.messages.map((message, index) => (
+        {props.messages.map((message, index, messages) => (
           <li className="message-item" key={index}>
             <div className="message-item-content">
-              <h3 className="message-sender">{message.username}</h3>
+              {index > 0 ? messages[index - 1].username !== message.username && <h3 className="message-sender">{message.username}</h3>
+              : <h3 className="message-sender">{message.username}</h3>}
               <p className="message-text">{message.text}</p>
             </div>
           </li>

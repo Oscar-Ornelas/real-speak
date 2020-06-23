@@ -388,7 +388,7 @@ ul {
 .message-text {
   word-break: break-all;
   color: #f2f2f2;
-  margin: 0;
+  margin: 5px 0;
   max-width: 350px;
 }
 

@@ -95,19 +95,8 @@ function RoomSettingsForm(props) {
                 </div>
                 <button className="room-form-submit" onClick={addUser}>Add User</button>
 
-                {/*<div className="input-item">
-                  <label className="room-form-label" for="userId">Remove user</label>
-                  <input
-                    placeholder="User Id (Email)"
-                    className="input"
-                    id="userId"
-                    onChange={handleChange}
-                    value={formData.userId}
-                    type="text"
-                    name="userId"
-                  />
-                </div> */}
-                <button className="room-form-submit" onClick={leaveRoom}>Remove User</button>
+
+                <button className="room-form-delete room-form-submit" onClick={leaveRoom}>Leave Room</button>
 
               </div>
             </form>
