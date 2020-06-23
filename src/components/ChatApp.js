@@ -21,7 +21,7 @@ function ChatApp(props) {
   const {roomId} = useParams();
   const {roomName} = useParams();
   const {user} = useAuth0();
-  const socket = socketIOClient("http://localhost:4001");
+  const socket = socketIOClient();
 
   useEffect(() => {
     const data = {roomId};
