@@ -1,7 +1,7 @@
 import React, {useState, useEffect} from 'react';
 
 function Input(props) {
-  const [messageInfo, setMessageInfo] = useState({username: "", timeSent: "", text: "", roomId: ""});
+  const [messageInfo, setMessageInfo] = useState({username: "", text: "", roomId: ""});
 
   useEffect(() => {
     if(props.username) {
