@@ -81,7 +81,7 @@ mongo.connect(url, {
   app.post("/api/findRoom", (req, res) => {
     collection.findOne({roomId: JSON.parse(req.body.roomId)}, (err, item) => {
       console.log(item)
-      res.json({roomId: item.roomId, roomDescription: item.roomDescription, roomName: item.roomName, users: item.users})
+      res.json({roomId: item.roomId, roomDescription: item.roomDescription, roomName: item.roomName, users: item.users, messages: item.roomMessages})
     });
   });
 
@@ -112,6 +112,7 @@ mongo.connect(url, {
       roomId: JSON.parse(req.body.roomId),
       roomName: req.body.roomName,
       roomDescription: req.body.roomDescription,
+      roomMessages: [],
       users: [{id: req.body.userId, username: req.body.username}]}, (err, result) => {
         res.json({roomName: req.body.roomName, roomId: req.body.roomId});
     });
@@ -128,6 +129,7 @@ mongo.connect(url, {
       roomId: JSON.parse(req.body.roomId),
       roomName: req.body.roomName,
       roomDescription: req.body.roomDescription,
+      roomMessages: [],
       users: [{id: req.body.userId, username: req.body.username}]}, (err, result) => {
     });
 
@@ -135,6 +137,14 @@ mongo.connect(url, {
       userId: req.body.userId},
       {$push: {rooms: req.body.roomId}}, (err, item) => {
         res.json({roomName: req.body.roomName, roomId: req.body.roomId});
+    });
+  });
+
+  app.post("/api/addMessage", (req, res) => {
+    collection.findOneAndUpdate({
+      roomId: JSON.parse(req.body.roomId)},
+      {$push: {roomMessages: req.body.message}}, (err, item) => {
+        console.log(item);
     });
   });
 

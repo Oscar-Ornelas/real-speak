@@ -34,7 +34,7 @@ function ChatApp(props) {
     })
     .then(response => response.json())
     .then(data => {
-
+      setMessages(data.messages);
       setRoomDescription(data.roomDescription);
       setRoomUsers(data.users)
     })
@@ -75,7 +75,15 @@ function ChatApp(props) {
     socket.emit("joined_room", roomId);
 
     socket.on("message", response => {
+      const data = {roomId, message: response};
       setMessages(prevMessages => [...prevMessages, response]);
+      fetch("/api/addMessage", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(data)
+      })
     })
   }, [roomId]);
 
