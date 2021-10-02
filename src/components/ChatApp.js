@@ -37,7 +37,7 @@ function ChatApp(props) {
       setRoomDescription(data.roomDescription);
       setRoomUsers(data.users)
     })
-  }, []);
+  }, [roomId]);
 
   useEffect(() => {
     const data = {userId: user.name};
