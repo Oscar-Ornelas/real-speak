@@ -27,7 +27,7 @@ function RoomSideBar(props) {
               {props.rooms.map(room => (
                 <li key={room.roomId} className="room-side-nav-item"><Link className="link" to={`/chatapp/${room.roomName}/${room.roomId}`}># {room.roomName}</Link></li>
               ))}
-              {user && <CreateRoomForm username={props.username}/>}
+              {user && <CreateRoomForm setRooms={props.setRooms} rooms={props.rooms} username={props.username}/>}
             </ul>
           </div>
 

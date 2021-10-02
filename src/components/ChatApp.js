@@ -119,6 +119,7 @@ function ChatApp(props) {
         roomNavSlide={roomNavSlide}
         username={fullUserInfo.username}
         rooms={userRooms}
+        setRooms={setUserRooms}
         />
 
         <main className="main">

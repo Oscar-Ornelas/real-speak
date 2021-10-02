@@ -39,7 +39,30 @@ function CreateRoomForm(props){
     .then(response => response.json())
     .then(data => {
       history.push(`/chatapp/${data.roomName}/${data.roomId}`);
-      window.location.reload();
+      const newData = {userId: user.name};
+      fetch("/api/findUser", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json"
+        },
+        body: JSON.stringify(newData)
+      })
+      .then(response => response.json())
+      .then(data => {
+        props.setRooms([]);
+        data.rooms.forEach(room => {
+          const data = {roomId: room}
+          fetch("/api/findRoom", {
+            method: "POST",
+            headers: {
+              "Content-Type": "application/json"
+            },
+            body: JSON.stringify(data)
+          })
+          .then(response => response.json())
+          .then(data => props.setRooms(prevRooms => [...prevRooms, data]));
+        })
+      })
     })
     .catch(err => console.log(err))
     setIsOpen(false);
