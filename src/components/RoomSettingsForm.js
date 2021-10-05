@@ -45,7 +45,6 @@ function RoomSettingsForm(props) {
   }
 
   function leaveRoom(e) {
-    console.log(props.userId);
     const data = {userId: props.userId, roomId: props.roomId};
     e.preventDefault();
     fetch("/api/removeUserFromRoom", {
