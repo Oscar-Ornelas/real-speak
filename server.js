@@ -40,7 +40,7 @@ const options = {
   form: {
     grant_type: 'client_credentials',
     client_id: '8Yjxilx9qldnHipHryE81gsbj09qLJb6',
-    client_secret: '-KEN7h9qjLhW2tYEMnbzavnOE3lAwzANfxxVeAkorwzh2WQOnE2wi3xqtGCG1a5q',
+    client_secret: `${process.env.CLIENT_SECRET}`,
     audience: 'https://dev-pdp1v9a4.auth0.com/api/v2/'
   }
 };
