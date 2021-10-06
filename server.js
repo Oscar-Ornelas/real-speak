@@ -39,7 +39,7 @@ const options = {
   headers: {'content-type': 'application/x-www-form-urlencoded'},
   form: {
     grant_type: 'client_credentials',
-    client_id: '8Yjxilx9qldnHipHryE81gsbj09qLJb6',
+    client_id: '0Ha63pjQGY1ao3Hveh8kIOM0biYukl60',
     client_secret: process.env.CLIENT_SECRET,
     audience: 'https://dev-pdp1v9a4.auth0.com/api/v2/'
   }
